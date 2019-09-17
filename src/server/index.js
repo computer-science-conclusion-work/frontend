@@ -1,5 +1,4 @@
 import express from 'express'
-//import cors from 'cors'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
@@ -17,7 +16,6 @@ const server = express()
 
 server
   .disable('x-powered-by')
-  //.use(cors())
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
   .get('/*', (req, res) => {
     // Compile an initial state
