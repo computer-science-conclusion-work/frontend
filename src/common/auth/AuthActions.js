@@ -23,7 +23,7 @@ export function fetchAuthenticatedUser() {
   return dispatch => {
     dispatch(action(AUTHENTICATED_USER.ACTION))
     axios
-      .get(`${consts.API_URL}/user/init`)
+      .get(`${consts.API_URL}/users/init`)
       .then(resp => resp.data)
       .then(data => dispatch(action(AUTHENTICATED_USER.SUCCESS, data)))
       .catch(e =>
@@ -50,7 +50,7 @@ export function logout() {
   return dispatch => {
     dispatch(action(LOGOUT.ACTION))
     return axios
-      .post(`${consts.API_URL}/logout`)
+      .get(`${consts.API_URL}/logout`)
       .then(data => {
         dispatch(action(LOGOUT.SUCCESS, data.data))
       })
