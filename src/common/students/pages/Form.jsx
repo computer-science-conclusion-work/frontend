@@ -26,7 +26,7 @@ class StudentForm extends EnhancedComponent {
 
   handleClose = () => this.props.onClose && this.props.onClose()
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(nextProps) {
     if (!this.state.dirty && nextProps.data) {
       this.setState({
         fields: {

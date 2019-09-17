@@ -31,7 +31,7 @@ class Snackbars extends Component {
     this.props.doClear()
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(nextProps) {
     if (nextProps.snackbar) {
       this.setState({
         open: true,
