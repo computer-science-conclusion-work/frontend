@@ -10,9 +10,6 @@ export const userKey = `${config.storagePrefix}_user`
 export const tokenKey = `${config.storagePrefix}_token`
 
 const INITIAL_STATE = {
-  forgotPassword: false,
-  loading: false,
-  modal: false,
   user: null,
   token: null,
 }
@@ -38,7 +35,6 @@ export default (state = INITIAL_STATE, action) => {
         }
         return newState
       }
-
       return { ...state }
     case LOGOUT.SUCCESS:
       localStorage.removeItem(userKey)

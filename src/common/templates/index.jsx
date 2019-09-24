@@ -6,9 +6,6 @@ import Typography from '@material-ui/core/Typography'
 // External
 import React, { Fragment } from 'react'
 
-// Internal
-import MyButton from '../components/MyButton'
-
 export default props => {
     return (
         <Fragment>
@@ -18,10 +15,6 @@ export default props => {
                 </Grid>
                 <Grid item>
                     {props.button}
-                    <MyButton
-                        route={props.route}
-                        icon={props.icon}
-                        name="Cadastrar" />
                 </Grid>
             </Grid>
 

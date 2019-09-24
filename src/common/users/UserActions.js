@@ -33,8 +33,7 @@ export function edit(id) {
     dispatch(action(EDIT_USER.ACTION, { id }))
     return axios
       .get(`${config.API_URL}/users/${id}`)
-      .then(resp => resp.data.data.item)
-      .then(data => dispatch(action(EDIT_USER.SUCCESS, data)))
+      .then(resp => dispatch(action(EDIT_USER.SUCCESS, resp.data.data)))
       .catch(e => dispatch(actionFailed(EDIT_USER, e)))
   }
 }
@@ -56,6 +55,7 @@ function submit(values, method) {
       .then(resp => resp.data)
       .then(data => {
         dispatch(action(SUBMIT_USER.SUCCESS, data))
+        dispatch(fetchUsers())
         return data
       })
       .catch(e => dispatch(actionFailed(SUBMIT_USER, e)))

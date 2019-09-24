@@ -1,7 +1,7 @@
 // IMPORTS
 // Material-ui
 import AppBar from '@material-ui/core/AppBar'
-import Button from '@material-ui/core/Button'
+import Menus from '@material-ui/core/Menu'
 import Collapse from '@material-ui/core/Collapse'
 import Divider from '@material-ui/core/Divider'
 import Drawer from '@material-ui/core/Drawer'
@@ -10,7 +10,9 @@ import List from '@material-ui/core/List'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import withStyles from '@material-ui/core/styles/withStyles'
+import MenuItem from '@material-ui/core/MenuItem'
 // Icons
+import MoreVertIcon from '@material-ui/icons/MoreVert'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
@@ -23,10 +25,10 @@ import PersonIcon from '@material-ui/icons/Person'
 // External
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
+import { withRouter } from 'react-router-dom'
 
 // Internal
 import config from '../../config'
@@ -35,10 +37,35 @@ import styles from '../../resources/theme/menu'
 import MenuButton from './MenuButton'
 
 class Menu extends Component {
-  state = { open: false }
+  constructor(props) {
+    super(props)
+
+    this.handleMenu = this.handleMenu.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+    this.handleClick = this.handleClick.bind(this)
+    this.handleEdit = this.handleEdit.bind(this)
+
+    this.state = {
+      open: false,
+      anchorEl: null
+    }
+  }
 
   handleClick = () => {
-    this.setState(state => ({ open: !state.open }))
+    this.setState({ ...this.state, open: !this.state.open })
+  }
+
+  handleMenu(event) {
+    this.setState({ ...this.state, anchorEl: event.currentTarget })
+  }
+
+  handleEdit() {
+    this.setState({ ...this.state, anchorEl: null })
+    this.props.history.push(`/my_users/${this.props.user.id}/edit`)
+  }
+
+  handleClose() {
+    this.setState({ ...this.state, anchorEl: null })
   }
 
   render() {
@@ -71,12 +98,35 @@ class Menu extends Component {
                 {config.title}
               </Typography>
             </div>
-            <Button
-              className={classes.btnLogout}
-              onClick={this.props.logout}
-              color="inherit" >
-              Sair
-            </Button>
+            <div className={classes.sectionDesktop}>
+              <IconButton
+                aria-label="Account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={this.handleMenu}
+                color="inherit"
+              >
+                <MoreVertIcon />
+              </IconButton>
+              <Menus
+                id="menu-appbar"
+                anchorEl={this.state.anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(this.state.anchorEl)}
+                onClose={this.handleClose}
+              >
+                <MenuItem onClick={this.handleEdit}>Editar</MenuItem>
+                <MenuItem onClick={this.props.logout}>Logout</MenuItem>
+              </Menus>
+            </div>
           </Toolbar>
         </AppBar>
 
@@ -89,7 +139,7 @@ class Menu extends Component {
             paper: classes.drawerPaper,
           }} >
           <div className={classes.drawerHeader}>
-            <IconButton light onClick={handleDrawerClose}>
+            <IconButton light="true" onClick={handleDrawerClose}>
               <ChevronLeftIcon color="primary" />
             </IconButton>
           </div>
@@ -101,6 +151,7 @@ class Menu extends Component {
               icon={<HomeIcon />}
               title="Home"/>
             <MenuButton
+              route=""
               handle={this.handleClick}
               icon={<OpenIcon />}
               title="Cadastros Básicos"
@@ -143,4 +194,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(styles)(Menu))
+)(withRouter(withStyles(styles)(Menu)))

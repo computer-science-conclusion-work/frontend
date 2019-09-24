@@ -1,7 +1,10 @@
 // IMPORTS
 // Material-ui
-import { Grid } from '@material-ui/core'
+import Dialog from '@material-ui/core/Dialog'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
+import CloseIcon from '@material-ui/icons/Close'
 
 // External
 import React from 'react'
@@ -24,12 +27,12 @@ export default props => {
                     <MyIconButton
                         handle={props.handleClose}
                         label="Close"
-                        icons={<CloseIcon />}
+                        icon={<CloseIcon />}
                     />
                 </Toolbar>
             </AppBar>
 
-            {props.chldren}
+            {props.children}
         </Dialog>
     )
 }

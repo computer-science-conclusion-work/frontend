@@ -17,4 +17,14 @@ export default class EnhancedComponent extends Component {
       },
     })
   }
+
+  onChangeCheckBox = name => event => {
+    this.setState({
+      dirty: true,
+      fields: {
+        ...this.state.fields,
+        [name]: event.target.checked,
+      },
+    })
+  }
 }

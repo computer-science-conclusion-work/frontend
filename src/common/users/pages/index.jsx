@@ -34,8 +34,10 @@ class User extends Component {
         grow={classes.grow}
         title="Usuários"
         button={<MyButton
+                  color="primary"
                   route="/users/new"
                   icon={<PersonAddIcon className={classes.btnIcon} />}
+                  name="Cadastrar"
                 />} >
         <Route path="/users/new" component={NewUser} />
         <Route path="/users/:id/edit" component={EditUser} />

@@ -32,6 +32,7 @@ class Student extends Component {
         grow={classes.grow}
         title="Estudantes"
         button={<MyButton
+                  color="primary"
                   route="/students/new"
                   icon={<SchoolAddIcon className={classes.btnIcon} />}
                 />} >

@@ -15,6 +15,8 @@ import React, { Component } from 'react'
 
 // Internal
 import ActionButton from '../../components/ActionButton'
+import consts from '../../../consts'
+import If from '../../components/If'
 
 class List extends Component {
   render() {
@@ -37,14 +39,16 @@ class List extends Component {
                 <TableCell>{item.email}</TableCell>
                 <TableCell>{item.role}</TableCell>
                 <TableCell>
-                  <ActionButton
-                    title="Editar"
-                    route={`/users/${item.id}/edit`}
-                    icon={<PencilIcon />}/>
-                  <ActionButton
-                    title="Deletar"
-                    route={`/users/${item.id}/delete`}
-                    icon={<DeleteIcon />}/>
+                  <If test={item.id != consts.ADMIN_ID}>
+                    <ActionButton
+                      title="Editar"
+                      route={`/my_users/${item.id}/edit`}
+                      icon={<PencilIcon />}/>
+                    <ActionButton
+                      title="Deletar"
+                      route={`/users/${item.id}/delete`}
+                      icon={<DeleteIcon />}/>
+                  </If>
                 </TableCell>
               </TableRow>
             ))}

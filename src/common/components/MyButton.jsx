@@ -9,13 +9,14 @@ import { Link } from 'react-router-dom'
 export default props => {
     return (
         <Button
+            type={props.type}
             size="medium"
-            color="primary"
+            color={props.color}
             variant="contained"
             component={Link}
             onClick={props.handle}
             to={props.route} >
-                {props.Icon} {props.name}
+                {props.icon} {props.name}
         </Button>
     )
 }

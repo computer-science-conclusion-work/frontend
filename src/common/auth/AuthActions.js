@@ -19,13 +19,14 @@ export function login(values) {
   return submit(values, `${consts.API_URL}/auth/login`)
 }
 
-export function fetchAuthenticatedUser() {
+export function fetchAuthenticatedUser(id) {
   return dispatch => {
     dispatch(action(AUTHENTICATED_USER.ACTION))
     axios
-      .get(`${consts.API_URL}/users/init`)
-      .then(resp => resp.data)
-      .then(data => dispatch(action(AUTHENTICATED_USER.SUCCESS, data)))
+      .get(`${consts.API_URL}/users/init/${id}`)
+      .then(resp => {
+        dispatch(action(AUTHENTICATED_USER.SUCCESS, resp.data))
+      })
       .catch(e =>
         dispatch(action(AUTHENTICATED_USER.FAILURE, null, e.response.data))
       )
@@ -37,10 +38,9 @@ export function submit(values, url) {
     dispatch(action(AUTHENTICATE.ACTION))
     axios
       .post(url, values)
-      .then(resp => resp.data)
-      .then(data => {
-        dispatch(action(AUTHENTICATE.SUCCESS, data))
-        fetchAuthenticatedUser()(dispatch)
+      .then(resp => {
+        dispatch(action(AUTHENTICATE.SUCCESS, resp.data))
+        fetchAuthenticatedUser(resp.data.id)(dispatch)
       })
       .catch(e => dispatch(action(AUTHENTICATE.FAILURE, null, e.response.data)))
   }

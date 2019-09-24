@@ -1,13 +1,15 @@
 // IMPORTS
 // Material-ui
 import { DialogActions, Grid, Select } from '@material-ui/core'
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator'
 import Button from '@material-ui/core/Button'
 import DialogContent from '@material-ui/core/DialogContent'
 import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
-import TextField from '@material-ui/core/TextField'
 import withStyles from '@material-ui/core/styles/withStyles'
+import SaveIcon from '@material-ui/icons/Save'
+import BackIcon from '@material-ui/icons/ArrowBack'
 
 // External
 import PropTypes from 'prop-types'
@@ -17,6 +19,7 @@ import { connect } from 'react-redux'
 // Internal
 import styles from '../../../resources/theme/users'
 import EnhancedComponent from '../../components/EnhancedComponent'
+import MyButton from '../../components/MyButton'
 
 class UserForm extends EnhancedComponent {
   state = {
@@ -24,17 +27,17 @@ class UserForm extends EnhancedComponent {
     fields: {
       name: '',
       email: '',
-      role_id: '',
+      id_role: '',
     },
   }
 
   handleClose = () => this.props.onClose && this.props.onClose()
 
-  componentDidUpdate(prevProps, prevState) {
-    if (!this.state.dirty && prevState.data) {
+  UNSAFE_componentWillReceiveProps(prevProps, prevState) {
+    if (!this.state.dirty && prevProps.data) {
       this.setState({
         fields: {
-          ...prevState.data,
+          ...prevProps.data,
         },
       })
     }
@@ -48,35 +51,42 @@ class UserForm extends EnhancedComponent {
   render() {
     const { classes, roles } = this.props
     return (
-      <form onSubmit={this.onSubmit}>
+      <ValidatorForm
+        ref="form"
+        onSubmit={this.onSubmit}
+        onError={errors => console.log(errors)}>
         <DialogContent>
           <Grid container spacing={16}>
-            <Grid item>
-              <TextField
+            <Grid item xs>
+              <TextValidator
                 onChange={this.onChange('name')}
                 label="Nome"
-                required
+                margin="dense"
+                variant="outlined"
                 fullWidth
                 value={this.state.fields.name}
-              />
+                validators={['required']}
+                errorMessages={['Campo Obrigatório']} />
             </Grid>
           </Grid>
           <Grid container spacing={16}>
-            <Grid item>
-              <TextField
+            <Grid item xs>
+              <TextValidator
                 onChange={this.onChange('email')}
-                label="E-mail"
-                required
+                label="Email"
+                margin="dense"
+                variant="outlined"
+                fullWidth
                 value={this.state.fields.email}
-              />
+                validators={['required', 'isEmail']}
+                errorMessages={['Campo Obrigatório', 'Email não é válido']} />
             </Grid>
-            <Grid item>
+            <Grid item xs>
               <FormControl className={classes.formControl}>
                 <InputLabel>Tipo de Usuário</InputLabel>
                 <Select
-                  onChange={this.onChange('role_id')}
-                  value={this.state.fields.role_id}
-                >
+                  onChange={this.onChange('id_role')}
+                  value={this.state.fields.id_role} >
                   <MenuItem>Selecione...</MenuItem>
                   {roles.map(role => (
                     <MenuItem key={role.id} value={role.id}>
@@ -89,12 +99,21 @@ class UserForm extends EnhancedComponent {
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button color="primary" type="submit">
-            Salvar
+          <Button
+            onClick={this.handleClose}
+            size="medium"
+            variant="contained">
+              <BackIcon />{` Cancelar`}
           </Button>
-          <Button onClick={this.handleClose}>Cancelar</Button>
+          <Button
+            type="submit"
+            color="primary"
+            size="medium"
+            variant="contained">
+              <SaveIcon />{` Salvar`}
+            </Button>
         </DialogActions>
-      </form>
+      </ValidatorForm>
     )
   }
 }
@@ -106,6 +125,7 @@ UserForm.propTypes = {
 
 const mapStateToProps = state => ({
   roles: state.user.roles || [],
+  user: state.user.editingUser || [],
 })
 
 export default connect(mapStateToProps)(withStyles(styles)(UserForm))

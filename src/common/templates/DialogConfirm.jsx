@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import Toolbar from '@material-ui/core/Toolbar'
 import BackIcon from '@material-ui/icons/ArrowBack'
 import DeleteIcon from '@material-ui/icons/Delete'
+import CloseIcon from '@material-ui/icons/Close'
 
 // External
 import React from 'react'
@@ -35,19 +36,20 @@ export default props => {
             </AppBar>
 
             <Typography>
-                <Grid container spacing={6} Style="padding: 20px">
-                    <Grid item xs>
-                        <MyButton 
-                            handle={props.handleSubmit}
-                            icon={<DeleteIcon className={classes.btnIcon} />}
-                            name="Confirmar"/>
-                    </Grid>
-
+                <Grid container spacing={10} Style="padding: 20px">
                     <Grid item xs>
                         <MyButton 
                             handle={props.handleOnClose}
-                            icon={<BackIcon className={classes.btnIcon} />}
+                            icon={<BackIcon />}
                             name="Cancelar"/>
+                    </Grid>
+
+                    <Grid item xs>
+                        <MyButton
+                            color="primary"
+                            handle={props.handleSubmit}
+                            icon={<DeleteIcon />}
+                            name="Confirmar"/>
                     </Grid>
                 </Grid>
             </Typography>
