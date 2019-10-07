@@ -31,12 +31,12 @@ class Snackbars extends Component {
     this.props.doClear()
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.snackbar) {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.snackbar) {
       this.setState({
         open: true,
-        message: prevState.snackbar.message,
-        success: prevState.snackbar.success,
+        message: nextProps.snackbar.message,
+        success: nextProps.snackbar.success,
       })
     }
   }

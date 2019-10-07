@@ -1,4 +1,4 @@
-import { EDIT_USER, FETCH_USER } from './UserActions'
+import { EDIT_USER, FETCH_USER, FETCH_ROLES } from './UserActions'
 
 const INITIAL_STATE = {
   items: [],
@@ -23,6 +23,11 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         editingUser: action.payload.item,
         roles: action.payload.roles
+      }
+    case FETCH_ROLES.SUCCESS:
+      return {
+        ...state,
+        roles: action.payload.data,items
       }
     case 'USER_INITIALIZE':
       return {

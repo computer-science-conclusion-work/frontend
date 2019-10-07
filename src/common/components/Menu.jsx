@@ -139,7 +139,7 @@ class Menu extends Component {
             paper: classes.drawerPaper,
           }} >
           <div className={classes.drawerHeader}>
-            <IconButton light="true" onClick={handleDrawerClose}>
+            <IconButton onClick={handleDrawerClose}>
               <ChevronLeftIcon color="primary" />
             </IconButton>
           </div>

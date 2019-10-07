@@ -14,7 +14,7 @@ import { bindActionCreators } from 'redux'
 import styles from '../../../resources/theme/users'
 import DialogForm from '../../templates/DialogForm'
 import EnhancedComponent from '../../components/EnhancedComponent'
-import { post } from '../UserActions'
+import { post, fetchRoles } from '../UserActions'
 import Form from './Form'
 
 function Transition(props) {
@@ -30,7 +30,9 @@ class NewUser extends EnhancedComponent {
     },
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.fetchRoles()
+  }
 
   onSubmit = values => {
     // valida os campos se necessário
@@ -46,7 +48,7 @@ class NewUser extends EnhancedComponent {
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, roles } = this.props
     return (
       <DialogForm
         open={true}
@@ -77,6 +79,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       post,
+      fetchRoles
     },
     dispatch
   )

@@ -82,7 +82,9 @@ class UserForm extends EnhancedComponent {
                 errorMessages={['Campo Obrigatório', 'Email não é válido']} />
             </Grid>
             <Grid item xs>
-              <FormControl className={classes.formControl}>
+              <FormControl
+                fullWidth
+                className={classes.formControl}>
                 <InputLabel>Tipo de Usuário</InputLabel>
                 <Select
                   onChange={this.onChange('id_role')}

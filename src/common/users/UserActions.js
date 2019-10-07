@@ -12,6 +12,8 @@ export const SUBMIT_USER = createAsyncConst('SUBMIT_USER')
 export const FETCH_USER = createAsyncConst('FETCH_USER')
 export const EDIT_USER = createAsyncConst('EDIT_USER')
 
+export const FETCH_ROLES = createAsyncConst('FETCH_ROLES')
+
 export function fetchUsers(page, filters = []) {
   return dispatch => {
     dispatch(action(FETCH_USER.ACTION))
@@ -22,9 +24,22 @@ export function fetchUsers(page, filters = []) {
       })
       .then(resp => {
         dispatch(action(FETCH_USER.SUCCESS, resp.data))
-        return resp
+        return resp.data
       })
       .catch(e => dispatch(actionFailed(FETCH_USER, e)))
+  }
+}
+
+export function fetchRoles() {
+  return dispatch => {
+    dispatch(action(FETCH_ROLES.ACTION))
+    return axios
+      .get(`${config.API_URL}/roles`)
+      .then(resp => {
+        dispatch(action(FETCH_ROLES.SUCCESS, resp.data))
+        return resp
+      })
+      .catch(e => dispatch(actionFailed(FETCH_ROLES, e)))
   }
 }
 

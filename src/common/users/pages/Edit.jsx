@@ -2,7 +2,6 @@
 // Material-ui
 import Slide from '@material-ui/core/Slide'
 import withStyles from '@material-ui/core/styles/withStyles'
-import CloseIcon from '@material-ui/icons/Close'
 
 // External
 import PropTypes from 'prop-types'
