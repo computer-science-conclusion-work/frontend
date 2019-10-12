@@ -1,15 +1,19 @@
 // IMPORTS
 // Material-ui
 import { DialogActions, Grid } from '@material-ui/core'
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator'
 import Button from '@material-ui/core/Button'
 import DialogContent from '@material-ui/core/DialogContent'
-import TextField from '@material-ui/core/TextField'
 import withStyles from '@material-ui/core/styles/withStyles'
-import PropTypes from 'prop-types'
+import DateFnsUtils from '@date-io/date-fns'
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers'
+import SaveIcon from '@material-ui/icons/Save'
+import BackIcon from '@material-ui/icons/ArrowBack'
 
 // External
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 // Internal
 import styles from '../../../resources/theme/students'
@@ -19,19 +23,29 @@ class StudentForm extends EnhancedComponent {
   state = {
     dirty: false,
     fields: {
-      id: '',
+      registration: '',
       name: '',
+      egress_date: new Date(), 
     },
   }
 
   handleClose = () => this.props.onClose && this.props.onClose()
 
-  componentDidUpdate(prevProps, prevState) {
-    if (!this.state.dirty && prevState.data) {
-      this.setState({
+  handleDateChange = date => {
+    this.setState({
+      ...this.state,
+      selectedDate: date
+    })
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.data !== prevState.data) {
+      return ({
+        ...prevState,
         fields: {
-          ...prevState.data,
-        },
+          ...nextProps.data,
+          egress_date: new Date(),
+        }
       })
     }
   }
@@ -43,29 +57,74 @@ class StudentForm extends EnhancedComponent {
 
   render() {
     return (
-      <form onSubmit={this.onSubmit}>
+      <ValidatorForm
+        ref="form"
+        onSubmit={this.onSubmit}
+        onError={errors => console.log(errors)}>
         <DialogContent>
           <Grid container spacing={16}>
             <Grid item xs>
-              <TextField
+              <TextValidator
+                onChange={this.onChange('registration')}
+                label="Matrícula"
+                margin="dense"
+                variant="outlined"
+                fullWidth
+                value={this.state.fields.registration}
+                validators={['required']}
+                errorMessages={['Campo Obrigatório']}
+              />
+            </Grid>
+            <Grid item xs>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  id="date-picker-inline"
+                  label="Data de Egresso"
+                  disableToolbar
+                  fullWidth
+                  variant="outlined"
+                  format="dd/MM/yyyy"
+                  margin="dense"
+                  value={this.state.fields.egress_date}
+                  onChange={this.handleDateChange}
+                  required
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                  }} />
+              </MuiPickersUtilsProvider>
+            </Grid>
+          </Grid>
+          <Grid container spacing={16}>
+            <Grid item xs>
+              <TextValidator
                 onChange={this.onChange('name')}
                 label="Nome"
                 margin="dense"
                 variant="outlined"
                 fullWidth
-                required
                 value={this.state.fields.name}
+                validators={['required']}
+                errorMessages={['Campo Obrigatório']}
               />
             </Grid>
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button color="primary" type="submit">
-            Salvar
+          <Button
+            onClick={this.handleClose}
+            size="medium"
+            variant="contained">
+              <BackIcon />{` Cancelar`}
           </Button>
-          <Button onClick={this.handleClose}>Cancelar</Button>
+          <Button
+            type="submit"
+            color="primary"
+            size="medium"
+            variant="contained">
+              <SaveIcon />{` Salvar`}
+          </Button>
         </DialogActions>
-      </form>
+      </ValidatorForm>
     )
   }
 }
@@ -76,7 +135,7 @@ StudentForm.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  roles: state.students.roles || [],
+  student: state.student.editingStudent || [],
 })
 
 export default connect(mapStateToProps)(withStyles(styles)(StudentForm))

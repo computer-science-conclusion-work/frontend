@@ -39,8 +39,7 @@ export function edit(id) {
     dispatch(action(EDIT_STUDENT.ACTION, { id }))
     return axios
       .get(`${config.API_URL}/students/${id}`)
-      .then(resp => resp.data.data.items)
-      .then(data => dispatch(action(EDIT_STUDENT.SUCCESS, data)))
+      .then(resp => dispatch(action(EDIT_STUDENT.SUCCESS, resp.data.data)))
       .catch(e => dispatch(actionFailed(EDIT_STUDENT, e)))
   }
 }

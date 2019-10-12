@@ -11,6 +11,7 @@ import { bindActionCreators } from 'redux'
 
 // Internal
 import styles from '../../../resources/theme/students'
+import DialogForm from '../../templates/DialogForm'
 import EnhancedComponent from '../../components/EnhancedComponent'
 import { edit, fetchStudents, update } from '../StudentsActions'
 import { getEditingStudent } from '../StudentsReducer'
@@ -21,13 +22,6 @@ function Transition(props) {
 }
 
 class EditStudent extends EnhancedComponent {
-  state = {
-    fields: {
-      id: '',
-      name: ''
-    },
-  }
-
   componentDidMount() {
     this.props.edit(this.props.match.params.id)
   }
@@ -73,7 +67,6 @@ EditStudent.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  roles: state.students.roles || [],
   student: getEditingStudent(state),
 })
 

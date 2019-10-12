@@ -3,11 +3,11 @@ import { EDIT_USER, FETCH_USER, FETCH_ROLES } from './UserActions'
 const INITIAL_STATE = {
   items: [],
   roles: [],
-  totalSize: 0,
-  page: 1,
-  sizePerPage: 10,
-  filters: [],
   editingUser: null,
+  filters: [],
+  page: 1,
+  totalSize: 0,
+  sizePerPage: 10,
 }
 
 export default (state = INITIAL_STATE, action) => {

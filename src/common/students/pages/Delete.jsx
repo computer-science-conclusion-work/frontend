@@ -11,6 +11,7 @@ import { bindActionCreators } from 'redux'
 
 // Internal
 import styles from '../../../resources/theme/default'
+import DialogConfirm from '../../templates/DialogConfirm'
 import EnhancedComponent from '../../components/EnhancedComponent'
 import { destroy, edit, fetchStudents, update } from '../StudentsActions'
 import { getEditingStudent } from '../StudentsReducer'
@@ -60,7 +61,6 @@ DeleteStudent.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  roles: state.students.roles || [],
   student: getEditingStudent(state),
 })
 

@@ -12,12 +12,14 @@ import { bindActionCreators } from 'redux'
 
 // Internal
 import styles from '../../../resources/theme/students'
-import { fetchStudents } from '../StudentsActions'
-import { getStudentListData } from '../StudentsReducer'
+import Index from '../../templates/index'
+import MyButton from '../../components/MyButton'
 import NewStudent from './New'
 import EditStudent from './Edit'
 import DeleteStudent from './Delete'
 import List from './List'
+import { fetchStudents } from '../StudentsActions'
+import { getStudentListData } from '../StudentsReducer'
 
 class Student extends Component {
   componentDidMount() {
@@ -35,6 +37,7 @@ class Student extends Component {
                   color="primary"
                   route="/students/new"
                   icon={<SchoolAddIcon className={classes.btnIcon} />}
+                  name="Cadastrar"
                 />} >
         <Route path="/students/new" component={NewStudent} />
         <Route path="/students/:id/edit" component={EditStudent} />

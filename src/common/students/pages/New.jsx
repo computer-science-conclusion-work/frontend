@@ -11,6 +11,7 @@ import { bindActionCreators } from 'redux'
 
 // Internal imports
 import styles from '../../../resources/theme/students'
+import DialogForm from '../../templates/DialogForm'
 import EnhancedComponent from '../../components/EnhancedComponent'
 import { post } from '../StudentsActions'
 import Form from './Form'
@@ -20,13 +21,6 @@ function Transition(props) {
 }
 
 class NewStudent extends EnhancedComponent {
-  state = {
-    fields: {
-      id: '',
-      name: '',
-    },
-  }
-
   componentDidMount() {}
 
   onSubmit = values => {
@@ -66,10 +60,6 @@ NewStudent.propTypes = {
   roles: PropTypes.array.isRequired,
 }
 
-const mapStateToProps = state => ({
-  roles: state.students.roles || [],
-})
-
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
@@ -79,6 +69,6 @@ const mapDispatchToProps = dispatch =>
   )
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(withStyles(styles)(NewStudent))

@@ -26,19 +26,21 @@ class List extends Component {
         <Table>
           <TableHead>
             <TableRow>
+              <TableCell align="center">ID</TableCell>
               <TableCell>Nome</TableCell>
               <TableCell>E-mail</TableCell>
-              <TableCell>Tipo</TableCell>
-              <TableCell>Ações</TableCell>
+              <TableCell align="center">Tipo</TableCell>
+              <TableCell align="center">Ações</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {items.map(item => (
               <TableRow key={item.id}>
+                <TableCell align="center">{item.id}</TableCell>
                 <TableCell>{item.name}</TableCell>
                 <TableCell>{item.email}</TableCell>
-                <TableCell>{item.role}</TableCell>
-                <TableCell>
+                <TableCell align="center">{item.role}</TableCell>
+                <TableCell align="center">
                   <If test={item.id != consts.ADMIN_ID}>
                     <ActionButton
                       title="Editar"

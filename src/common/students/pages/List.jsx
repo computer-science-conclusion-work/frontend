@@ -16,9 +16,12 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 // Internal imports
+import ActionButton from '../../components/ActionButton'
 import consts from '../../../consts'
+//import If from '../../components/If'
 import Paginate from '../../components/Paginate'
 import { fetchStudents } from '../StudentsActions'
+import { getStudentListData } from '../StudentsReducer'
 
 class List extends Component {
   constructor(props) {
@@ -48,9 +51,10 @@ class List extends Component {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Matrícula</TableCell>
-              <TableCell>Nome</TableCell>
-              <TableCell>Ações</TableCell>
+              <TableCell style={{ width: '20%' }} align="center">Matrícula</TableCell>
+              <TableCell style={{ width: '40%' }}>Nome</TableCell>
+              <TableCell style={{ width: '20%' }} align="center">Data de Egresso</TableCell>
+              <TableCell style={{ width: '20%' }} align="center">Ações</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -58,9 +62,10 @@ class List extends Component {
               items.data &&
               items.data.map(item => (
                 <TableRow key={item.id}>
-                  <TableCell>{item.id}</TableCell>
+                  <TableCell align="center">{item.registration}</TableCell>
                   <TableCell>{item.name}</TableCell>
-                  <TableCell>
+                  <TableCell align="center">{`dd/mm/YYYY`}</TableCell>
+                  <TableCell align="center">
                     <ActionButton
                       title="Editar"
                       route={`/students/${item.id}/edit`}
@@ -77,8 +82,7 @@ class List extends Component {
         <Paginate
           handleChangeRowsPerPage={this.handleChangeRowsPerPage}
           rowsPerPage={this.state.rowsPerPage}
-          rows={items.total}
-          page={items.current_page - 1}
+          items={items}
           handleChangePage={this.onChangePage}
         />
       </Paper>
@@ -96,7 +100,7 @@ List.defaultProps = {
 }
 
 const mapStateToProps = state => ({
-  filters: state.students.filters,
+  ...getStudentListData(state),
 })
 
 const mapDispatchToProps = dispatch =>

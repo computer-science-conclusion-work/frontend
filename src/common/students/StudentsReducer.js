@@ -3,11 +3,11 @@ import { EDIT_STUDENT, FETCH_STUDENT, REMOVE_STUDENT } from './StudentsActions'
 const INITIAL_STATE = {
   items: [],
   roles: [],
-  totalSize: 0,
-  page: 1,
-  sizePerPage: 10,
-  filters: [],
   editingStudent: null,
+  filters: [],
+  page: 1,
+  totalSize: 0,
+  sizePerPage: 10,
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -21,7 +21,7 @@ export default (state = INITIAL_STATE, action) => {
     case EDIT_STUDENT.SUCCESS:
       return {
         ...state,
-        editingStudent: action.payload,
+        editingStudent: action.payload.items,
       }
     case REMOVE_STUDENT.SUCCESS:
       return {
@@ -32,10 +32,6 @@ export default (state = INITIAL_STATE, action) => {
     case 'STUDENT_INITIALIZE':
       return {
         ...state,
-        roles: action.payload.data.roles,
-        students: action.payload.data.students,
-        branches: action.payload.data.branches,
-        role: action.payload.data.role,
       }
     default:
       return state
@@ -44,14 +40,13 @@ export default (state = INITIAL_STATE, action) => {
 
 export const getStudentListData = state => {
   return {
-    items: state.students.items,
-    roles: state.students.roles,
-    totalSize: state.students.totalSize,
-    page: state.students.page,
-    sizePerPage: state.students.sizePerPage,
+    items: state.student.items,
+    page: state.student.page,
+    totalSize: state.student.totalSize,
+    sizePerPage: state.student.sizePerPage,
   }
 }
 
 export const getEditingStudent = state => {
-  return state.students.editingStudent
+  return state.student.editingStudent
 }

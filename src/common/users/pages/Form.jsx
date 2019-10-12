@@ -18,7 +18,6 @@ import { connect } from 'react-redux'
 // Internal
 import styles from '../../../resources/theme/users'
 import EnhancedComponent from '../../components/EnhancedComponent'
-import MyButton from '../../components/MyButton'
 
 class UserForm extends EnhancedComponent {
   state = {
@@ -32,12 +31,13 @@ class UserForm extends EnhancedComponent {
 
   handleClose = () => this.props.onClose && this.props.onClose()
 
-  componentWillReceiveProps(prevProps, prevState) {
-    if (!this.state.dirty && prevProps.data) {
-      this.setState({
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.data !== prevState.data) {
+      return ({
+        ...prevState,
         fields: {
-          ...prevProps.data,
-        },
+          ...nextProps.data,
+        }
       })
     }
   }
@@ -112,7 +112,7 @@ class UserForm extends EnhancedComponent {
             size="medium"
             variant="contained">
               <SaveIcon />{` Salvar`}
-            </Button>
+          </Button>
         </DialogActions>
       </ValidatorForm>
     )
