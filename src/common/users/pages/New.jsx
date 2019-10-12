@@ -22,14 +22,6 @@ function Transition(props) {
 }
 
 class NewUser extends EnhancedComponent {
-  state = {
-    fields: {
-      name: '',
-      email: '',
-      role_id: '',
-    },
-  }
-
   componentDidMount() {
     this.props.fetchRoles()
   }

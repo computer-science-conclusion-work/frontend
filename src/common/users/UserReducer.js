@@ -27,7 +27,7 @@ export default (state = INITIAL_STATE, action) => {
     case FETCH_ROLES.SUCCESS:
       return {
         ...state,
-        roles: action.payload.data,items
+        roles: action.payload.data.items
       }
     case 'USER_INITIALIZE':
       return {

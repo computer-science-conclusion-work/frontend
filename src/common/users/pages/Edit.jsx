@@ -22,14 +22,6 @@ function Transition(props) {
 }
 
 class EditUser extends EnhancedComponent {
-  state = {
-    fields: {
-      name: '',
-      email: '',
-      role_id: '',
-    },
-  }
-
   componentDidMount() {
     this.props.edit(this.props.match.params.id)
   }

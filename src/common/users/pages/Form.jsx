@@ -4,8 +4,7 @@ import { DialogActions, Grid, Select } from '@material-ui/core'
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator'
 import Button from '@material-ui/core/Button'
 import DialogContent from '@material-ui/core/DialogContent'
-import FormControl from '@material-ui/core/FormControl'
-import InputLabel from '@material-ui/core/InputLabel'
+import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import withStyles from '@material-ui/core/styles/withStyles'
 import SaveIcon from '@material-ui/icons/Save'
@@ -33,7 +32,7 @@ class UserForm extends EnhancedComponent {
 
   handleClose = () => this.props.onClose && this.props.onClose()
 
-  UNSAFE_componentWillReceiveProps(prevProps, prevState) {
+  componentWillReceiveProps(prevProps, prevState) {
     if (!this.state.dirty && prevProps.data) {
       this.setState({
         fields: {
@@ -82,21 +81,21 @@ class UserForm extends EnhancedComponent {
                 errorMessages={['Campo Obrigatório', 'Email não é válido']} />
             </Grid>
             <Grid item xs>
-              <FormControl
+              <TextField
+                select
+                label="Tipo de Usuário"
                 fullWidth
-                className={classes.formControl}>
-                <InputLabel>Tipo de Usuário</InputLabel>
-                <Select
-                  onChange={this.onChange('id_role')}
-                  value={this.state.fields.id_role} >
-                  <MenuItem>Selecione...</MenuItem>
-                  {roles.map(role => (
-                    <MenuItem key={role.id} value={role.id}>
-                      {role.value}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+                onChange={this.onChange('id_role')}
+                value={this.state.fields.id_role}
+                margin="dense"
+                variant="outlined"
+              >
+                {roles.map(role => (
+                  <MenuItem key={role.id} value={role.id}>
+                    {role.value}
+                  </MenuItem>
+                ))}
+              </TextField>
             </Grid>
           </Grid>
         </DialogContent>
