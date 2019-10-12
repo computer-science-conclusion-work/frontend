@@ -81,11 +81,12 @@ export function destroy(id) {
   return dispatch => {
     dispatch(action(REMOVE_USER.ACTION))
     return axios
-      .delete(`${config.API_URL}/user/${id}`)
+      .delete(`${config.API_URL}/users/${id}`)
       .then(resp => resp.data)
       .then(data => {
         dispatch(action(REMOVE_USER.SUCCESS, data))
         dispatch(fetchUsers())
+        return data
       })
       .catch(e => actionFailed(REMOVE_USER.FAILURE, e))
   }

@@ -28,6 +28,7 @@ class DeleteUser extends EnhancedComponent {
   onSubmit = () => {
     const { user } = this.props
     this.props.destroy(user.id).then(data => {
+      console.log(data)
       if (data && data.code === 200) {
         this.props.history.push('/users')
       }
