@@ -18,7 +18,7 @@ export default props => {
             <ListItemIcon>
                 {props.icon}
             </ListItemIcon>
-            <ListItemText inset primary={props.title} />
+            <ListItemText primary={props.title} />
                 {props.expand}
         </ListItem>
     )

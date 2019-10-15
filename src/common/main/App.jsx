@@ -2,6 +2,8 @@
 // Material-ui
 import withStyles from '@material-ui/core/styles/withStyles'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import DateFnsUtils from '@date-io/date-fns'
+import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 
 // External
 import PropTypes from 'prop-types'
@@ -35,15 +37,17 @@ class App extends Component {
 
     return (
       <div className={classes.root}>
-        <CssBaseline />
-        <Menu open={open} handleDrawerClose={this.handleDrawerClose} handleDrawerOpen={this.handleDrawerOpen} />
-        <main className={classNames(classes.content, {
-            [classes.contentShift]: open,
-          })}
-        >
-          <div className={classes.drawerHeader} />
-          <Routes />
-        </main>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <CssBaseline />
+          <Menu open={open} handleDrawerClose={this.handleDrawerClose} handleDrawerOpen={this.handleDrawerOpen} />
+          <main className={classNames(classes.content, {
+              [classes.contentShift]: open,
+            })}
+          >
+            <div className={classes.drawerHeader} />
+            <Routes />
+          </main>
+        </MuiPickersUtilsProvider>
       </div>
     )
   }

@@ -76,11 +76,11 @@ class Filters extends EnhancedComponent {
             <Divider />
             <ExpansionPanelActions>
               <Button
-                type="submit"
-                color="primary"
-                size="small"
-                className={classes.submit}
-              >
+                  type="submit"
+                  color="primary"
+                  size="small"
+                  className={classes.submit}
+                >
                 Filtrar
               </Button>
             </ExpansionPanelActions>

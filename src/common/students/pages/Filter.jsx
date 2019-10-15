@@ -52,12 +52,22 @@ class Filters extends EnhancedComponent {
                   <TextField
                     onChange={this.onChange('registration')}
                     label="Matrícula"
+                    type="number"
                     margin="dense"
-                    className={classes.inputFilter}
                     variant="outlined"
                     fullWidth
                     value={this.state.fields.registration}
-                  />
+                    validators={[
+                      'required',
+                      'isNumber',
+                      'minNumber:0',
+                    ]}
+                    errorMessages={[
+                      'Campo Obrigatório',
+                      'Somente números',
+                      'Deve ser maior que a 0',
+                    ]}
+                    />
                 </Grid>
 
                 <Grid item xs>

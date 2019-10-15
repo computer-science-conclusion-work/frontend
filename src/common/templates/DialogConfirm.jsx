@@ -36,7 +36,7 @@ export default props => {
             </AppBar>
 
             <Typography>
-                <Grid container spacing={10} Style="padding: 20px">
+                <Grid container spacing={2} Style="padding: 20px">
                     <Grid item xs>
                         <MyButton 
                             handle={props.handleOnClose}

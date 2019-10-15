@@ -25,6 +25,7 @@ class UserForm extends EnhancedComponent {
     fields: {
       name: '',
       email: '',
+      password: '',
       id_role: '',
     },
   }
@@ -55,7 +56,7 @@ class UserForm extends EnhancedComponent {
         onSubmit={this.onSubmit}
         onError={errors => console.log(errors)}>
         <DialogContent>
-          <Grid container spacing={16}>
+          <Grid container spacing={2}>
             <Grid item xs>
               <TextValidator
                 onChange={this.onChange('name')}
@@ -67,8 +68,6 @@ class UserForm extends EnhancedComponent {
                 validators={['required']}
                 errorMessages={['Campo Obrigatório']} />
             </Grid>
-          </Grid>
-          <Grid container spacing={2}>
             <Grid item xs>
               <TextValidator
                 onChange={this.onChange('email')}
@@ -79,6 +78,19 @@ class UserForm extends EnhancedComponent {
                 value={this.state.fields.email}
                 validators={['required', 'isEmail']}
                 errorMessages={['Campo Obrigatório', 'Email não é válido']} />
+            </Grid>
+          </Grid>
+          <Grid container spacing={2}>
+            <Grid item xs>
+              <TextField
+                onChange={this.onChange('password')}
+                fullWidth
+                label="Senha"
+                margin="dense"
+                variant="outlined"
+                type="password"
+                value={this.state.fields.password}
+                />
             </Grid>
             <Grid item xs>
               <TextValidator

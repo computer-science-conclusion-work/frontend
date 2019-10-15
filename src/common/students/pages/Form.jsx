@@ -5,8 +5,7 @@ import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator'
 import Button from '@material-ui/core/Button'
 import DialogContent from '@material-ui/core/DialogContent'
 import withStyles from '@material-ui/core/styles/withStyles'
-import DateFnsUtils from '@date-io/date-fns'
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers'
+import { KeyboardDatePicker } from '@material-ui/pickers'
 import SaveIcon from '@material-ui/icons/Save'
 import BackIcon from '@material-ui/icons/ArrowBack'
 
@@ -70,34 +69,41 @@ class StudentForm extends EnhancedComponent {
               <TextValidator
                 onChange={this.onChange('registration')}
                 label="Matrícula"
+                type="number"
                 margin="dense"
                 variant="outlined"
                 fullWidth
                 value={this.state.fields.registration}
-                validators={['required']}
-                errorMessages={['Campo Obrigatório']}
-              />
+                validators={[
+                  'required',
+                  'isNumber',
+                  'minNumber:0',
+                ]}
+                errorMessages={[
+                  'Campo Obrigatório',
+                  'Somente números',
+                  'Deve ser maior que a 0',
+                ]}
+                />
             </Grid>
             <Grid item xs>
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardDatePicker
-                  id="date-picker-inline"
-                  label="Data de Egresso"
-                  disableToolbar
-                  fullWidth
-                  variant="outlined"
-                  format="dd/MM/yyyy"
-                  margin="dense"
-                  value={this.state.fields.egress_date}
-                  onChange={this.handleDateChange}
-                  required
-                  KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                  }} />
-              </MuiPickersUtilsProvider>
+              <KeyboardDatePicker
+                id="date-picker-inline"
+                label="Data de Egresso"
+                disableToolbar
+                fullWidth
+                variant="outlined"
+                format="dd/MM/yyyy"
+                margin="dense"
+                value={this.state.fields.egress_date}
+                onChange={this.handleDateChange}
+                required
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }} />
             </Grid>
           </Grid>
-          <Grid container spacing={16}>
+          <Grid container spacing={2}>
             <Grid item xs>
               <TextValidator
                 onChange={this.onChange('name')}
