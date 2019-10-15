@@ -18,6 +18,7 @@ import NewUser from './New'
 import EditUser from './Edit'
 import DeleteUser from './Delete'
 import List from './List'
+import Filter from './Filter'
 import { fetchUsers } from '../UserActions'
 import { getUserListData } from '../UserReducer'
 
@@ -39,6 +40,8 @@ class User extends Component {
                   icon={<PersonAddIcon className={classes.btnIcon} />}
                   name="Cadastrar"
                 />} >
+        <Filter />
+
         <Route path="/users/new" component={NewUser} />
         <Route path="/users/:id/edit" component={EditUser} />
         <Route path="/users/:id/delete" component={DeleteUser} />

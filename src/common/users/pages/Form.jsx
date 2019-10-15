@@ -11,9 +11,9 @@ import SaveIcon from '@material-ui/icons/Save'
 import BackIcon from '@material-ui/icons/ArrowBack'
 
 // External
-import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 // Internal
 import styles from '../../../resources/theme/users'
@@ -68,7 +68,7 @@ class UserForm extends EnhancedComponent {
                 errorMessages={['Campo Obrigatório']} />
             </Grid>
           </Grid>
-          <Grid container spacing={16}>
+          <Grid container spacing={2}>
             <Grid item xs>
               <TextValidator
                 onChange={this.onChange('email')}
@@ -81,7 +81,7 @@ class UserForm extends EnhancedComponent {
                 errorMessages={['Campo Obrigatório', 'Email não é válido']} />
             </Grid>
             <Grid item xs>
-              <TextField
+              <TextValidator
                 select
                 label="Tipo de Usuário"
                 fullWidth
@@ -89,13 +89,15 @@ class UserForm extends EnhancedComponent {
                 value={this.state.fields.id_role}
                 margin="dense"
                 variant="outlined"
+                validators={['required']}
+                errorMessages={['Campo Obrigatório']}
               >
                 {roles.map(role => (
                   <MenuItem key={role.id} value={role.id}>
                     {role.value}
                   </MenuItem>
                 ))}
-              </TextField>
+              </TextValidator>
             </Grid>
           </Grid>
         </DialogContent>

@@ -8,12 +8,12 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import DeleteIcon from '@material-ui/icons/Delete'
 import PencilIcon from '@material-ui/icons/Edit'
-import PropTypes from 'prop-types'
 
 // Externals imports (Dependencies)
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import PropTypes from 'prop-types'
 
 // Internal imports
 import ActionButton from '../../components/ActionButton'

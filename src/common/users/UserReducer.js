@@ -15,7 +15,8 @@ export default (state = INITIAL_STATE, action) => {
     case FETCH_USER.SUCCESS:
       return {
         ...state,
-        items: action.payload.data.items,
+        items: action.payload.data.items.data,
+        roles: action.payload.data.roles,
         filters: action.payload.data.filters,
       }
     case EDIT_USER.SUCCESS:

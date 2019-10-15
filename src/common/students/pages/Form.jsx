@@ -34,14 +34,17 @@ class StudentForm extends EnhancedComponent {
   handleDateChange = date => {
     this.setState({
       ...this.state,
-      selectedDate: date
+      fields: {
+        ...this.state.fields,
+        egress_date: date
+      }
     })
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.data !== prevState.data) {
       return ({
-        ...prevState,
+        ...nextProps,
         fields: {
           ...nextProps.data,
           egress_date: new Date(),
@@ -62,7 +65,7 @@ class StudentForm extends EnhancedComponent {
         onSubmit={this.onSubmit}
         onError={errors => console.log(errors)}>
         <DialogContent>
-          <Grid container spacing={16}>
+          <Grid container spacing={2}>
             <Grid item xs>
               <TextValidator
                 onChange={this.onChange('registration')}

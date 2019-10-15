@@ -3,10 +3,10 @@ export default theme => ({
     flex: 1,
   },
   btnIcon: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing(1),
   },
   content: {
-    marginTop: theme.spacing.unit * 2,
+    marginTop: theme.spacing(2),
   },
   appBar: {
     position: 'relative',
@@ -15,7 +15,7 @@ export default theme => ({
     flex: 1,
   },
   paper: {
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing(3),
   },
   formControl: {
     minWidth: 180,

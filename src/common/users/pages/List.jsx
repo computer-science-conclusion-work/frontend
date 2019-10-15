@@ -10,15 +10,41 @@ import PencilIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 
 // External
-import PropTypes from 'prop-types'
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import PropTypes from 'prop-types'
 
 // Internal
 import ActionButton from '../../components/ActionButton'
 import consts from '../../../consts'
 import If from '../../components/If'
+import Paginate from '../../components/Paginate'
+import { fetchUsers } from '../UserActions'
+import { getUserListData } from '../UserReducer'
 
 class List extends Component {
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      rowsPerPage: consts.DEFAULT_PAGINATION,
+    }
+  }
+
+  handleChangeRowsPerPage = event => {
+    this.setState({ rowsPerPage: event.target.value }, () => {
+      this.onChangePage(null, null, 0)
+    })
+  }
+  
+  onChangePage = (event, newPage) => {
+    this.props
+      .fetchUsers(newPage + 1, this.props.filters, this.state.rowsPerPage)
+      .then(data => {})
+  }
+
   render() {
     const { classes, items } = this.props
     return (
@@ -56,6 +82,12 @@ class List extends Component {
             ))}
           </TableBody>
         </Table>
+        <Paginate
+          handleChangeRowsPerPage={this.handleChangeRowsPerPage}
+          rowsPerPage={this.state.rowsPerPage}
+          items={items}
+          handleChangePage={this.onChangePage}
+        />
       </Paper>
     )
   }
@@ -70,4 +102,19 @@ List.defaultProps = {
   items: [],
 }
 
-export default List
+const mapStateToProps = state => ({
+  ...getUserListData(state),
+})
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      fetchUsers,
+    },
+    dispatch
+  )
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(List)

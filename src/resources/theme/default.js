@@ -46,7 +46,7 @@ export default theme => ({
     },
     helper: {
       borderLeft: `2px solid ${theme.palette.divider}`,
-      padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
+      padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
     },
     link: {
       color: theme.palette.primary.main,
@@ -73,10 +73,10 @@ export default theme => ({
       color: theme.palette.secondary.main,
     },
     btnIcon: {
-      marginRight: theme.spacing.unit,
+      marginRight: theme.spacing(1),
     },
     content: {
-      marginTop: theme.spacing.unit * 2,
+      marginTop: theme.spacing(2),
     },
     appBar: {
       position: 'relative',
@@ -91,7 +91,7 @@ export default theme => ({
       padding: 15,
     },
     paper: {
-      padding: theme.spacing.unit * 3,
+      padding: theme.spacing(3),
     },
     paperInfo: {
       marginBottom: 20,

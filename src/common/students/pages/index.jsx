@@ -18,6 +18,7 @@ import NewStudent from './New'
 import EditStudent from './Edit'
 import DeleteStudent from './Delete'
 import List from './List'
+import Filter from './Filter'
 import { fetchStudents } from '../StudentsActions'
 import { getStudentListData } from '../StudentsReducer'
 
@@ -39,6 +40,8 @@ class Student extends Component {
                   icon={<SchoolAddIcon className={classes.btnIcon} />}
                   name="Cadastrar"
                 />} >
+        <Filter />
+
         <Route path="/students/new" component={NewStudent} />
         <Route path="/students/:id/edit" component={EditStudent} />
         <Route path="/students/:id/delete" component={DeleteStudent} />

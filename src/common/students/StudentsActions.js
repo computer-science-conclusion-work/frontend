@@ -57,7 +57,7 @@ function submit(values, method) {
 
   return dispatch => {
     dispatch(action(SUBMIT_STUDENT.ACTION))
-    return axios[method](`${config.API_URL}/students/${id}`, values)
+    return axios[method](`${config.API_URL}/students${id}`, values)
       .then(resp => resp.data)
       .then(data => {
         dispatch(action(SUBMIT_STUDENT.SUCCESS, data))

@@ -4,6 +4,7 @@ import axios from 'axios/index'
 
 // Internal
 import config from '../../config'
+import consts from '../../consts'
 import action, { actionFailed } from '../../util/action'
 import createAsyncConst from '../../util/createAsyncConst'
 
@@ -14,11 +15,13 @@ export const EDIT_USER = createAsyncConst('EDIT_USER')
 
 export const FETCH_ROLES = createAsyncConst('FETCH_ROLES')
 
-export function fetchUsers(page, filters = []) {
+export function fetchUsers(page, filters = [], rows) {
   return dispatch => {
     dispatch(action(FETCH_USER.ACTION))
     return axios
-      .get(`${config.API_URL}/users?filters=` + JSON.stringify(filters), {
+      .get(`${config.API_URL}/users?filters=${JSON.stringify(
+          filters
+        )}&&page=${page}&&rows=${rows || consts.DEFAULT_PAGINATION}`, {
         page,
         filters,
       })
