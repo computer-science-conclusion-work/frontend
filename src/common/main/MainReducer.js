@@ -1,9 +1,10 @@
 // IMPORTS
 // Internals
-import { SNACKBAR, SNACKBAR_CLEAR } from './MainActions'
+import { SNACKBAR, SNACKBAR_CLEAR, loading } from './MainActions'
 
 const INITIAL_STATE = {
   snackbar: null,
+  loadingCircle: '',
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -29,6 +30,12 @@ export default (state = INITIAL_STATE, action) => {
           message: action.success.message,
           success: true,
         },
+      }
+    case loading:
+      let status = state.loadingCircle === ''? 'active' : ''
+      return {
+        ...state,
+        loadingCircle: status
       }
     default:
       return state

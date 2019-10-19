@@ -10,10 +10,11 @@ export default props => {
     return (
         <Button
             type={props.type}
-            size="medium"
+            size={props.size}
             color={props.color}
             variant="contained"
             component={Link}
+            className={props.classes}
             onClick={props.handle}
             to={props.route} >
                 {props.icon} {props.name}

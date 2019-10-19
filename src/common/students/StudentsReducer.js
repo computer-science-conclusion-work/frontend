@@ -15,7 +15,7 @@ export default (state = INITIAL_STATE, action) => {
     case FETCH_STUDENT.SUCCESS:
       return {
         ...state,
-        items: action.payload.data.items,
+        items: action.payload.data.items.data,
         filters: action.payload.data.filters,
       }
     case EDIT_STUDENT.SUCCESS:
@@ -40,10 +40,7 @@ export default (state = INITIAL_STATE, action) => {
 
 export const getStudentListData = state => {
   return {
-    items: state.student.items,
-    page: state.student.page,
-    totalSize: state.student.totalSize,
-    sizePerPage: state.student.sizePerPage,
+    items: state.student.items
   }
 }
 

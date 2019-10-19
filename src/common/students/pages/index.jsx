@@ -36,6 +36,7 @@ class Student extends Component {
         title="Estudantes"
         button={<MyButton
                   color="primary"
+                  size="medium"
                   route="/students/new"
                   icon={<SchoolAddIcon className={classes.btnIcon} />}
                   name="Cadastrar"

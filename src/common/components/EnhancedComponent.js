@@ -27,4 +27,14 @@ export default class EnhancedComponent extends Component {
       },
     })
   }
+
+  onChangeValue = name => value => {
+    this.setState({
+      dirty: true,
+      fields: {
+        ...this.state.fields,
+        [name]: value,
+      },
+    })
+  }
 }

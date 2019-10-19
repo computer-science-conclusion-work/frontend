@@ -20,4 +20,10 @@ export default theme => ({
   formControl: {
     minWidth: 180,
   },
+  tableRow: {
+    backgroundColor: '#FFFFCC',
+  },
+  tableCell: {
+    backgroundColor: '#FFFFCC',
+  },
 })

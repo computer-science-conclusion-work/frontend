@@ -11,6 +11,7 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import withStyles from '@material-ui/core/styles/withStyles'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import SearchIcon from '@material-ui/icons/Search'
 
 // External
 import React from 'react'
@@ -89,9 +90,10 @@ class Filters extends EnhancedComponent {
                 type="submit"
                 color="primary"
                 size="small"
-                className={classes.submit}
-              >
-                Filtrar
+                variant="contained"
+                className={classes.submit} >
+                <SearchIcon />
+                {` Filtrar`}
               </Button>
             </ExpansionPanelActions>
           </ExpansionPanel>

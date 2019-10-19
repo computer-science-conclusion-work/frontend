@@ -5,7 +5,7 @@ import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator'
 import Button from '@material-ui/core/Button'
 import DialogContent from '@material-ui/core/DialogContent'
 import withStyles from '@material-ui/core/styles/withStyles'
-import { KeyboardDatePicker } from '@material-ui/pickers'
+import { DatePicker } from '@material-ui/pickers'
 import SaveIcon from '@material-ui/icons/Save'
 import BackIcon from '@material-ui/icons/ArrowBack'
 
@@ -29,16 +29,6 @@ class StudentForm extends EnhancedComponent {
   }
 
   handleClose = () => this.props.onClose && this.props.onClose()
-
-  handleDateChange = date => {
-    this.setState({
-      ...this.state,
-      fields: {
-        ...this.state.fields,
-        egress_date: date
-      }
-    })
-  }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.data !== prevState.data) {
@@ -87,20 +77,16 @@ class StudentForm extends EnhancedComponent {
                 />
             </Grid>
             <Grid item xs>
-              <KeyboardDatePicker
-                id="date-picker-inline"
+              <DatePicker
                 label="Data de Egresso"
-                disableToolbar
                 fullWidth
-                variant="outlined"
                 format="dd/MM/yyyy"
+                disableFuture
+                inputVariant="outlined"
                 margin="dense"
-                value={this.state.fields.egress_date}
-                onChange={this.handleDateChange}
                 required
-                KeyboardButtonProps={{
-                  'aria-label': 'change date',
-                }} />
+                onChange={this.onChangeValue('egress_date')}
+                value={this.state.fields.egress_date} />
             </Grid>
           </Grid>
           <Grid container spacing={2}>

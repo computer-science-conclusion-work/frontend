@@ -4,7 +4,7 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 
 // Internal
-import { SNACKBAR } from './MainActions'
+import { SNACKBAR, loading } from './MainActions'
 import rootReducer from './reducers'
 
 const composeEnhancers =
@@ -47,11 +47,35 @@ const snackBars = store => next => action => {
   }
 }
 
+const loadingCircle = store => next => action => {
+  next(action)
+
+  if (action.loading && action.loading == true) {
+    if(action.type.indexOf('.ACTION') > -1){
+      store.dispatch({
+        type: loading
+      })
+    }
+
+    if(action.type.indexOf('.SUCCESS') > -1){
+      store.dispatch({
+        type: loading
+      })
+    }
+
+    if(action.type.indexOf('.FAILURE') > -1){
+      store.dispatch({
+        type: loading
+      })
+    }
+  }
+}
+
 const configureStore = preloadedState => {
   const store = createStore(
     rootReducer,
     preloadedState,
-    composeEnhancers(applyMiddleware(thunk, catchErrors, snackBars))
+    composeEnhancers(applyMiddleware(thunk, catchErrors, snackBars, loadingCircle))
   )
 
   if (module.hot) {

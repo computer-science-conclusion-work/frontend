@@ -19,6 +19,7 @@ import PropTypes from 'prop-types'
 import ActionButton from '../../components/ActionButton'
 import consts from '../../../consts'
 import If from '../../components/If'
+import EmptyList from '../../components/EmptyList'
 import Paginate from '../../components/Paginate'
 import { fetchUsers } from '../UserActions'
 import { getUserListData } from '../UserReducer'
@@ -60,26 +61,32 @@ class List extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {items.map(item => (
-              <TableRow key={item.id}>
-                <TableCell align="center">{item.id}</TableCell>
-                <TableCell>{item.name}</TableCell>
-                <TableCell>{item.email}</TableCell>
-                <TableCell align="center">{item.role}</TableCell>
-                <TableCell align="center">
-                  <If test={item.id != consts.ADMIN_ID}>
-                    <ActionButton
-                      title="Editar"
-                      route={`/my_users/${item.id}/edit`}
-                      icon={<PencilIcon />}/>
-                    <ActionButton
-                      title="Deletar"
-                      route={`/users/${item.id}/delete`}
-                      icon={<DeleteIcon />}/>
-                  </If>
-                </TableCell>
-              </TableRow>
-            ))}
+            {
+              items ? items.map(item => (
+                <TableRow key={item.id}>
+                  <TableCell align="center">{item.id}</TableCell>
+                  <TableCell>{item.name}</TableCell>
+                  <TableCell>{item.email}</TableCell>
+                  <TableCell align="center">{item.role}</TableCell>
+                  <TableCell align="center">
+                    <If test={item.id != consts.ADMIN_ID}>
+                      <ActionButton
+                        title="Editar"
+                        route={`/my_users/${item.id}/edit`}
+                        icon={<PencilIcon />}/>
+                      <ActionButton
+                        title="Deletar"
+                        route={`/users/${item.id}/delete`}
+                        icon={<DeleteIcon />}/>
+                    </If>
+                  </TableCell>
+                </TableRow>
+              )) : 
+            <EmptyList tableCell={classes.tableCell}
+              colSpan={5}
+              gridContainer={classes.gridContainer}
+              message={'Lista Vazia'} />
+            }
           </TableBody>
         </Table>
         <Paginate

@@ -18,6 +18,7 @@ import PropTypes from 'prop-types'
 // Internal imports
 import ActionButton from '../../components/ActionButton'
 import consts from '../../../consts'
+import EmptyList from '../../components/EmptyList'
 //import If from '../../components/If'
 import Paginate from '../../components/Paginate'
 import { fetchStudents } from '../StudentsActions'
@@ -58,9 +59,8 @@ class List extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {items &&
-              items.data &&
-              items.data.map(item => (
+            {
+              items ? items.map(item => (
                 <TableRow key={item.id}>
                   <TableCell align="center">{item.registration}</TableCell>
                   <TableCell>{item.name}</TableCell>
@@ -76,7 +76,12 @@ class List extends Component {
                       icon={<DeleteIcon />}/>
                   </TableCell>
                 </TableRow>
-              ))}
+              )) :
+              <EmptyList tableCell={classes.tableCell}
+                colSpan={5}
+                gridContainer={classes.gridContainer}
+                message={'Lista Vazia'} /> 
+            }
           </TableBody>
         </Table>
         <Paginate

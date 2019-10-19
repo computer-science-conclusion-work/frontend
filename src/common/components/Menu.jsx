@@ -77,8 +77,13 @@ class Menu extends Component {
       handleDrawerClose,
     } = this.props
 
+    const active = this.props.loading || ''
+
     return (
       <div>
+        <div className={`uil-ring-css ${active}`}>
+            <div/>
+        </div>
         <AppBar
           position="fixed"
           className={classNames(classes.appBar, {
@@ -181,7 +186,10 @@ Menu.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = state => ({ user: state.auth.user || [] })
+const mapStateToProps = state => ({
+  user: state.auth.user || [],
+  loading: state.main.loadingCircle
+})
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(

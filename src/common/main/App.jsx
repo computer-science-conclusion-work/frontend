@@ -3,6 +3,7 @@
 import withStyles from '@material-ui/core/styles/withStyles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import DateFnsUtils from '@date-io/date-fns'
+import ptBRLocale from 'date-fns/locale/pt-BR'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 
 // External
@@ -37,7 +38,7 @@ class App extends Component {
 
     return (
       <div className={classes.root}>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ptBRLocale}>
           <CssBaseline />
           <Menu open={open} handleDrawerClose={this.handleDrawerClose} handleDrawerOpen={this.handleDrawerOpen} />
           <main className={classNames(classes.content, {

@@ -1,13 +1,14 @@
 import { logout } from '../common/auth/AuthActions'
 
-export default function action(type, payload = {}, error = false) {
+export default function action(type, payload = {}, error = false, putLoading = true) {
   const action = { type }
   if (payload) action.payload = payload
   if (error) action.error = error
+  action.loading = putLoading
   return action
 }
 
-export function actionFailed(type, e) {
+export function actionFailed(type, e, putLoading = true) {
   return dispatch => {
     let error = e.response.data.message
 
@@ -19,6 +20,6 @@ export function actionFailed(type, e) {
       error = e.response.data.message.map(err => err)
     }
 
-    return dispatch(action(type.FAILURE, null, { message: error }))
+    return dispatch(action(type.FAILURE, null, { message: error }, putLoading))
   }
 }

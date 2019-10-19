@@ -4,6 +4,7 @@ export const SNACKBAR = {
   SOFTFAIL: 'SNACKBAR.SOFTFAIL',
   SOFTSUCCESS: 'SNACKBAR.SOFTSUCCESS',
 }
+export const loading = 'loading'
 
 export function clearSnackbar() {
   return { type: SNACKBAR_CLEAR }

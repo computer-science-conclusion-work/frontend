@@ -35,6 +35,7 @@ class User extends Component {
         grow={classes.grow}
         title="Usuários"
         button={<MyButton
+                  size="medium"
                   color="primary"
                   route="/users/new"
                   icon={<PersonAddIcon className={classes.btnIcon} />}

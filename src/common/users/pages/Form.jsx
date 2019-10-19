@@ -82,7 +82,7 @@ class UserForm extends EnhancedComponent {
           </Grid>
           <Grid container spacing={2}>
             <Grid item xs>
-              <TextField
+              <TextValidator
                 onChange={this.onChange('password')}
                 fullWidth
                 label="Senha"
@@ -90,6 +90,8 @@ class UserForm extends EnhancedComponent {
                 variant="outlined"
                 type="password"
                 value={this.state.fields.password}
+                validators={['required']}
+                errorMessages={['Campo Obrigatório']}
                 />
             </Grid>
             <Grid item xs>

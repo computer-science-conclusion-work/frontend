@@ -38,7 +38,8 @@ export default props => {
             <Typography>
                 <Grid container spacing={2} Style="padding: 20px">
                     <Grid item xs>
-                        <MyButton 
+                        <MyButton
+                            size="medium"
                             handle={props.handleOnClose}
                             icon={<BackIcon />}
                             name="Cancelar"/>
@@ -47,6 +48,7 @@ export default props => {
                     <Grid item xs>
                         <MyButton
                             color="primary"
+                            size="medium"
                             handle={props.handleSubmit}
                             icon={<DeleteIcon />}
                             name="Confirmar"/>
