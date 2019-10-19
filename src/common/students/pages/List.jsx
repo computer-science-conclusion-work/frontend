@@ -64,7 +64,7 @@ class List extends Component {
                 <TableRow key={item.id}>
                   <TableCell align="center">{item.registration}</TableCell>
                   <TableCell>{item.name}</TableCell>
-                  <TableCell align="center">{`dd/mm/YYYY`}</TableCell>
+                  <TableCell align="center">{item.egress_date || 'não informado'}</TableCell>
                   <TableCell align="center">
                     <ActionButton
                       title="Editar"

@@ -84,7 +84,6 @@ class StudentForm extends EnhancedComponent {
                 disableFuture
                 inputVariant="outlined"
                 margin="dense"
-                required
                 onChange={this.onChangeValue('egress_date')}
                 value={this.state.fields.egress_date} />
             </Grid>
