@@ -4,7 +4,6 @@ import { DialogActions, Grid, Select } from '@material-ui/core'
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator'
 import Button from '@material-ui/core/Button'
 import DialogContent from '@material-ui/core/DialogContent'
-import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import withStyles from '@material-ui/core/styles/withStyles'
 import SaveIcon from '@material-ui/icons/Save'
@@ -35,9 +34,10 @@ class UserForm extends EnhancedComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.data !== prevState.data) {
       return ({
-        ...prevState,
+        ...nextProps,
         fields: {
           ...nextProps.data,
+          password: '',
         }
       })
     }
@@ -49,7 +49,7 @@ class UserForm extends EnhancedComponent {
   }
 
   render() {
-    const { classes, roles } = this.props
+    const { roles } = this.props
     return (
       <ValidatorForm
         ref="form"
@@ -141,8 +141,7 @@ UserForm.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  roles: state.user.roles || [],
-  user: state.user.editingUser || [],
+  roles: state.user.roles,
 })
 
 export default connect(mapStateToProps)(withStyles(styles)(UserForm))

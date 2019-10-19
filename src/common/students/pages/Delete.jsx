@@ -13,7 +13,7 @@ import { bindActionCreators } from 'redux'
 import styles from '../../../resources/theme/default'
 import DialogConfirm from '../../templates/DialogConfirm'
 import EnhancedComponent from '../../components/EnhancedComponent'
-import { destroy, edit, fetchStudents, update } from '../StudentsActions'
+import { destroy, edit } from '../StudentsActions'
 import { getEditingStudent } from '../StudentsReducer'
 
 function Transition(props) {
@@ -26,8 +26,8 @@ class DeleteStudent extends EnhancedComponent {
   }
 
   onSubmit = () => {
-    const { student } = this.props
-    this.props.destroy(student.id).then(data => {
+    const { student, filters } = this.props
+    this.props.destroy(student.id, filters).then(data => {
       if (data && data.code === 200) {
         this.props.history.push('/students')
       }
@@ -61,16 +61,14 @@ DeleteStudent.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  student: getEditingStudent(state),
+  ...getEditingStudent(state),
 })
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      update,
       destroy,
       edit,
-      fetchStudents,
     },
     dispatch
   )

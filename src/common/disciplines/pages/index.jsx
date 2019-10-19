@@ -1,7 +1,7 @@
 // IMPORTS
 // Material-ui
 import withStyles from '@material-ui/core/styles/withStyles'
-import SchoolAddIcon from '@material-ui/icons/School'
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
 import PropTypes from 'prop-types'
 
 // Externals
@@ -11,21 +11,21 @@ import { Route } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 
 // Internal
-import styles from '../../../resources/theme/students'
+import styles from '../../../resources/theme/disciplines'
 import Index from '../../templates/index'
 import MyButton from '../../components/MyButton'
-import NewStudent from './New'
-import EditStudent from './Edit'
-import DeleteStudent from './Delete'
+import NewDiscipline from './New'
+import EditDiscipline from './Edit'
+import DeleteDiscipline from './Delete'
 import List from './List'
 import Filter from './Filter'
-import { fetchStudents } from '../StudentsActions'
-import { getStudentListData } from '../StudentsReducer'
+import { fetchDisciplines } from '../DisciplinesActions'
+import { getDisciplineListData } from '../DisciplinesReducer'
 
-class Student extends Component {
+class Discipline extends Component {
   componentDidMount() {
     const { filters } = this.props
-    this.props.fetchStudents(null, filters)
+    this.props.fetchDisciplines(null, filters)
   }
 
   render() {
@@ -34,19 +34,19 @@ class Student extends Component {
     return (
       <Index
         grow={classes.grow}
-        title="Estudantes"
+        title="Disciplinas"
         button={<MyButton
                   color="primary"
                   size="medium"
-                  route="/students/new"
-                  icon={<SchoolAddIcon className={classes.btnIcon} />}
+                  route="/disciplines/new"
+                  icon={<LibraryBooksIcon className={classes.btnIcon} />}
                   name="Cadastrar"
                 />} >
         <Filter />
 
-        <Route path="/students/new" component={NewStudent} />
-        <Route path="/students/:id/edit" component={EditStudent} />
-        <Route path="/students/:id/delete" component={DeleteStudent} />
+        <Route path="/disciplines/new" component={NewDiscipline} />
+        <Route path="/disciplines/:id/edit" component={EditDiscipline} />
+        <Route path="/disciplines/:id/delete" component={DeleteDiscipline} />
 
         <List classes={classes} items={items} />
       </Index>
@@ -54,20 +54,20 @@ class Student extends Component {
   }
 }
 
-Student.propTypes = {
+Discipline.propTypes = {
   classes: PropTypes.object.isRequired,
-  fetchStudents: PropTypes.func.isRequired,
+  fetchDisciplines: PropTypes.func.isRequired,
   items: PropTypes.array.isRequired,
 }
 
 const mapStateToProps = state => ({
-  ...getStudentListData(state),
+  ...getDisciplineListData(state),
 })
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      fetchStudents,
+      fetchDisciplines,
     },
     dispatch
   )
@@ -75,4 +75,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(styles)(Student))
+)(withStyles(styles)(Discipline))

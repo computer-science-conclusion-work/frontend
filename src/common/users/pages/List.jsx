@@ -48,6 +48,7 @@ class List extends Component {
 
   render() {
     const { classes, items } = this.props
+    var users = items && items.data ? items.data : []
     return (
       <Paper className={classes.content} elevation={1}>
         <Table>
@@ -62,7 +63,7 @@ class List extends Component {
           </TableHead>
           <TableBody>
             {
-              items ? items.map(item => (
+              users ? users.map(item => (
                 <TableRow key={item.id}>
                   <TableCell align="center">{item.id}</TableCell>
                   <TableCell>{item.name}</TableCell>

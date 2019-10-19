@@ -10,18 +10,18 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 // Internal
-import styles from '../../../resources/theme/students'
+import styles from '../../../resources/theme/disciplines'
 import DialogForm from '../../templates/DialogForm'
 import EnhancedComponent from '../../components/EnhancedComponent'
-import { edit, update } from '../StudentsActions'
-import { getEditingStudent } from '../StudentsReducer'
+import { edit, update } from '../DisciplinesActions'
+import { getEditingDiscipline } from '../DisciplinesReducer'
 import Form from './Form'
 
 function Transition(props) {
   return <Slide direction="down" {...props} />
 }
 
-class EditStudent extends EnhancedComponent {
+class EditDiscipline extends EnhancedComponent {
   componentDidMount() {
     this.props.edit(this.props.match.params.id)
   }
@@ -31,27 +31,27 @@ class EditStudent extends EnhancedComponent {
     // valida os campos se necessário
     this.props.update(values, filters).then(data => {
       if (data && data.code === 200) {
-        this.props.history.push('/students')
+        this.props.history.push('/disciplines')
       }
     })
   }
 
   onClose = () => {
-    this.props.history.push('/students')
+    this.props.history.push('/disciplines')
   }
 
   render() {
-    const { classes, student} = this.props
+    const { classes, discipline} = this.props
     return (
       <DialogForm
-        open={student !== null}
+        open={discipline !== null}
         handleClose={this.onClose}
         transition={Transition}
         appBar={classes.appBar}
         flex={classes.flex}
-        title="Editar Estudante">
+        title="Editar Disciplina">
         <Form
-          data={student}
+          data={discipline}
           onClose={this.onClose}
           onSubmit={this.onSubmit} />
       </DialogForm>
@@ -59,14 +59,14 @@ class EditStudent extends EnhancedComponent {
   }
 }
 
-EditStudent.propTypes = {
+EditDiscipline.propTypes = {
   classes: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   roles: PropTypes.array.isRequired,
 }
 
 const mapStateToProps = state => ({
-  ...getEditingStudent(state),
+  ...getEditingDiscipline(state),
 })
 
 const mapDispatchToProps = dispatch =>
@@ -81,4 +81,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(styles)(EditStudent))
+)(withStyles(styles)(EditDiscipline))

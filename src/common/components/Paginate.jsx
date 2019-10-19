@@ -16,7 +16,7 @@ class Pagination extends Component {
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 rowsPerPage={this.props.rowsPerPage}
-                count={this.props.items.total || this.props.items.length}
+                count={this.props.items.total || 0}
                 page={this.props.items.current_page - 1 || 0}
                 component="div"
                 labelRowsPerPage='Linhas Por Página'

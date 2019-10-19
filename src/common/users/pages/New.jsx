@@ -27,8 +27,9 @@ class NewUser extends EnhancedComponent {
   }
 
   onSubmit = values => {
+    const { filters } = this.props
     // valida os campos se necessário
-    this.props.post(values).then(data => {
+    this.props.post(values, filters).then(data => {
       if (data && data.code === 200) {
         this.props.history.push('/users')
       }
@@ -64,7 +65,8 @@ NewUser.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  roles: state.user.roles || [],
+  roles: state.user.roles,
+  filters: state.user.filters, 
 })
 
 const mapDispatchToProps = dispatch =>

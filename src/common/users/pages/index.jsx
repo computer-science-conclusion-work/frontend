@@ -24,7 +24,8 @@ import { getUserListData } from '../UserReducer'
 
 class User extends Component {
   componentDidMount() {
-    this.props.fetchUsers()
+    const { filters } = this.props
+    this.props.fetchUsers(null, filters)
   }
 
   render() {

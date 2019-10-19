@@ -13,7 +13,7 @@ import { bindActionCreators } from 'redux'
 import styles from '../../../resources/theme/users'
 import DialogForm from '../../templates/DialogForm'
 import EnhancedComponent from '../../components/EnhancedComponent'
-import { edit, fetchUsers, update } from '../UserActions'
+import { edit, update } from '../UserActions'
 import { getEditingUser } from '../UserReducer'
 import Form from './Form'
 
@@ -27,9 +27,8 @@ class EditUser extends EnhancedComponent {
   }
 
   onSubmit = values => {
-    const { fetchUsers } = this.props
-    this.props.update(values).then(data => {
-      fetchUsers()
+    const { filters } = this.props
+    this.props.update(values, filters).then(data => {
       if (data && data.code === 200) {
         this.props.history.push('/users')
       }
@@ -66,16 +65,14 @@ EditUser.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  roles: state.user.roles || [],
-  user: getEditingUser(state),
+  ...getEditingUser(state),
 })
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      update,
       edit,
-      fetchUsers,
+      update,
     },
     dispatch
   )

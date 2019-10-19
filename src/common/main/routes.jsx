@@ -10,6 +10,7 @@ import consts from '../../consts'
 import Home from './pages/Home'
 import Users from '../users/pages/index'
 import Students from '../students/pages/index'
+import Disciplines from '../disciplines/pages/index'
 import EditUser from '../users/pages/Edit'
 
 /* Rotas Privadas */
@@ -52,6 +53,7 @@ const Routes = () => {
       {/* Rotas Privadas para Admin */}
       <PrivateRoute role={[consts.ROLE_ADMIN]} path="/users" component={Users} />
       <PrivateRoute role={[consts.ROLE_ADMIN]} path="/students" component={Students} />
+      <PrivateRoute role={[consts.ROLE_ADMIN]} path="/disciplines" component={Disciplines} />
 
       {/* Rotas Privadas para Professor */}
 

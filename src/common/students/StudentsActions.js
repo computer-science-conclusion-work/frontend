@@ -27,7 +27,7 @@ export function fetchStudents(page, filters = [], rows) {
         }
       )
       .then(resp => {
-        dispatch(action(FETCH_STUDENT.SUCCESS, resp.data))
+        dispatch(action(FETCH_STUDENT.SUCCESS, {data: resp.data, filters: filters}))
         return resp
       })
       .catch(e => dispatch(actionFailed(FETCH_STUDENT, e)))
@@ -44,40 +44,38 @@ export function edit(id) {
   }
 }
 
-export function post(values) {
-  return submit(values, 'post')
+export function post(values, filters = []) {
+  return submit(values, 'post', filters)
 }
 
-export function update(values) {
-  return submit(values, 'put')
+export function update(values, filters = []) {
+  return submit(values, 'put', filters)
 }
 
-function submit(values, method) {
+function submit(values, method, filters = []) {
   const id = values.id ? `/${values.id}` : ''
 
   return dispatch => {
     dispatch(action(SUBMIT_STUDENT.ACTION))
     return axios[method](`${config.API_URL}/students${id}`, values)
-      .then(resp => resp.data)
-      .then(data => {
-        dispatch(action(SUBMIT_STUDENT.SUCCESS, data))
-        dispatch(fetchStudents())
-        return data
+      .then(resp => {
+        dispatch(action(SUBMIT_STUDENT.SUCCESS, resp.data))
+        dispatch(fetchStudents(null, filters))
+        return resp.data
       })
       .catch(e => dispatch(actionFailed(SUBMIT_STUDENT, e)))
   }
 }
 
-export function destroy(id) {
+export function destroy(id, filters = []) {
   return dispatch => {
     dispatch(action(REMOVE_STUDENT.ACTION))
     return axios
       .delete(`${config.API_URL}/students/${id}`)
-      .then(resp => resp.data)
-      .then(data => {
-        dispatch(action(REMOVE_STUDENT.SUCCESS, data))
-        dispatch(fetchStudents())
-        return data
+      .then(resp => {
+        dispatch(action(REMOVE_STUDENT.SUCCESS, resp.data))
+        dispatch(fetchStudents(null, filters))
+        return resp.data
       })
       .catch(e => actionFailed(REMOVE_STUDENT.FAILURE, e))
   }

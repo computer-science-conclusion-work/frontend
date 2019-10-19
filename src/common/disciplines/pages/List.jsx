@@ -21,8 +21,8 @@ import consts from '../../../consts'
 import EmptyList from '../../components/EmptyList'
 //import If from '../../components/If'
 import Paginate from '../../components/Paginate'
-import { fetchStudents } from '../StudentsActions'
-import { getStudentListData } from '../StudentsReducer'
+import { fetchDisciplines } from '../DisciplinesActions'
+import { getDisciplineListData } from '../DisciplinesReducer'
 
 class List extends Component {
   constructor(props) {
@@ -41,39 +41,41 @@ class List extends Component {
 
   onChangePage = (event, newPage) => {
     this.props
-      .fetchStudents(newPage + 1, this.props.filters, this.state.rowsPerPage)
+      .fetchDisciplines(newPage + 1, this.props.filters, this.state.rowsPerPage)
       .then(data => {})
   }
 
   render() {
     const { classes, items } = this.props
-    var students = items && items.data ? items.data : []
+    var disciplines = items && items.data ? items.data : []
     return (
       <Paper className={classes.content} elevation={1}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell style={{ width: '20%' }} align="center">Matrícula</TableCell>
-              <TableCell style={{ width: '40%' }}>Nome</TableCell>
-              <TableCell style={{ width: '20%' }} align="center">Data de Egresso</TableCell>
+              <TableCell style={{ width: '20%' }}>Código</TableCell>
+              <TableCell style={{ width: '20%' }}>Nome</TableCell>
+              <TableCell style={{ width: '20%' }} align="center">Pseudônimo</TableCell>
+              <TableCell style={{ width: '20%' }} align="center">Período</TableCell>
               <TableCell style={{ width: '20%' }} align="center">Ações</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {
-              students ? students.map(item => (
+              disciplines ? disciplines.map(item => (
                 <TableRow key={item.id}>
-                  <TableCell align="center">{item.registration}</TableCell>
+                  <TableCell>{item.code}</TableCell>
                   <TableCell>{item.name}</TableCell>
-                  <TableCell align="center">{item.egress_date || 'não informado'}</TableCell>
+                  <TableCell align="center">{item.alias}</TableCell>
+                  <TableCell align="center">{`${item.period}°`}</TableCell>
                   <TableCell align="center">
                     <ActionButton
                       title="Editar"
-                      route={`/students/${item.id}/edit`}
+                      route={`/disciplines/${item.id}/edit`}
                       icon={<PencilIcon />}/>
                     <ActionButton
                       title="Deletar"
-                      route={`/students/${item.id}/delete`}
+                      route={`/disciplines/${item.id}/delete`}
                       icon={<DeleteIcon />}/>
                   </TableCell>
                 </TableRow>
@@ -106,13 +108,13 @@ List.defaultProps = {
 }
 
 const mapStateToProps = state => ({
-  ...getStudentListData(state),
+  ...getDisciplineListData(state),
 })
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      fetchStudents,
+      fetchDisciplines,
     },
     dispatch
   )

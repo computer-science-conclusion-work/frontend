@@ -22,20 +22,21 @@ import PropTypes from 'prop-types'
 // Internal
 import styles from '../../../resources/theme/default'
 import EnhancedComponent from '../../components/EnhancedComponent'
-import { fetchStudents } from '../StudentsActions'
+import { fetchDisciplines } from '../DisciplinesActions'
 
 class Filters extends EnhancedComponent {
   state = {
     dirty: false,
     fields: {
-      registration: '',
+      code: '',
       name: '',
+      period: '',
     },
   }
 
   onSubmit = e => {
     e.preventDefault()
-    this.props.fetchStudents(null, this.state.fields).then(data => {})
+    this.props.fetchDisciplines(null, this.state.fields).then(data => {})
   }
 
   render() {
@@ -49,19 +50,19 @@ class Filters extends EnhancedComponent {
             </ExpansionPanelSummary>
             <ExpansionPanelDetails className={classes.details}>
               <Grid className={classes.gridContainer} container spacing={2}>
-                <Grid item xs>
+                <Grid item xs={3}>
                   <TextField
-                    onChange={this.onChange('registration')}
-                    label="Matrícula"
+                    onChange={this.onChange('code')}
+                    label="Código"
                     type="number"
                     margin="dense"
                     variant="outlined"
                     fullWidth
-                    value={this.state.fields.registration}
+                    value={this.state.fields.code}
                     />
                 </Grid>
 
-                <Grid item xs>
+                <Grid item xs xs={6}>
                   <TextField
                     onChange={this.onChange('name')}
                     label="Nome"
@@ -71,6 +72,18 @@ class Filters extends EnhancedComponent {
                     fullWidth
                     value={this.state.fields.name}
                   />
+                </Grid>
+
+                <Grid item xs={3}>
+                  <TextField
+                    onChange={this.onChange('period')}
+                    label="Período"
+                    type="number"
+                    margin="dense"
+                    variant="outlined"
+                    fullWidth
+                    value={this.state.fields.period}
+                    />
                 </Grid>
               </Grid>
             </ExpansionPanelDetails>
@@ -100,7 +113,7 @@ Filters.PropTypes = {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      fetchStudents
+      fetchDisciplines
     },
     dispatch
   )

@@ -24,8 +24,9 @@ class NewStudent extends EnhancedComponent {
   componentDidMount() {}
 
   onSubmit = values => {
+    const { filters } = this.props
     // valida os campos se necessário
-    this.props.post(values).then(data => {
+    this.props.post(values, filters).then(data => {
       if (data && data.code === 200) {
         this.props.history.push('/students')
       }
@@ -60,6 +61,10 @@ NewStudent.propTypes = {
   roles: PropTypes.array.isRequired,
 }
 
+const mapStateToProps = state => ({
+  filters: state.student.filters,
+})
+
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
@@ -69,6 +74,6 @@ const mapDispatchToProps = dispatch =>
   )
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withStyles(styles)(NewStudent))

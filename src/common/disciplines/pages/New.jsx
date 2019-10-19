@@ -4,54 +4,50 @@ import Slide from '@material-ui/core/Slide'
 import withStyles from '@material-ui/core/styles/withStyles'
 import PropTypes from 'prop-types'
 
-// External
+// Externals imports (Dependencies)
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-// Internal
-import styles from '../../../resources/theme/students'
+// Internal imports
+import styles from '../../../resources/theme/disciplines'
 import DialogForm from '../../templates/DialogForm'
 import EnhancedComponent from '../../components/EnhancedComponent'
-import { edit, update } from '../StudentsActions'
-import { getEditingStudent } from '../StudentsReducer'
+import { post } from '../DisciplinesActions'
 import Form from './Form'
 
 function Transition(props) {
   return <Slide direction="down" {...props} />
 }
 
-class EditStudent extends EnhancedComponent {
-  componentDidMount() {
-    this.props.edit(this.props.match.params.id)
-  }
+class NewDiscipline extends EnhancedComponent {
+  componentDidMount() {}
 
   onSubmit = values => {
     const { filters } = this.props
     // valida os campos se necessário
-    this.props.update(values, filters).then(data => {
+    this.props.post(values, filters).then(data => {
       if (data && data.code === 200) {
-        this.props.history.push('/students')
+        this.props.history.push('/disciplines')
       }
     })
   }
 
   onClose = () => {
-    this.props.history.push('/students')
+    this.props.history.push('/disciplines')
   }
 
   render() {
-    const { classes, student} = this.props
+    const { classes } = this.props
     return (
       <DialogForm
-        open={student !== null}
+        open={true}
         handleClose={this.onClose}
         transition={Transition}
         appBar={classes.appBar}
         flex={classes.flex}
-        title="Editar Estudante">
+        title="Nova Disciplina">
         <Form
-          data={student}
           onClose={this.onClose}
           onSubmit={this.onSubmit} />
       </DialogForm>
@@ -59,21 +55,20 @@ class EditStudent extends EnhancedComponent {
   }
 }
 
-EditStudent.propTypes = {
+NewDiscipline.propTypes = {
   classes: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   roles: PropTypes.array.isRequired,
 }
 
 const mapStateToProps = state => ({
-  ...getEditingStudent(state),
+  filters: state.discipline.filters,
 })
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      edit,
-      update,
+      post,
     },
     dispatch
   )
@@ -81,4 +76,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(styles)(EditStudent))
+)(withStyles(styles)(NewDiscipline))

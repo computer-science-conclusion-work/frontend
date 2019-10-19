@@ -4,7 +4,10 @@ const INITIAL_STATE = {
   items: [],
   roles: [],
   editingUser: null,
-  filters: [],
+  filters: {
+    id: '',
+    name: '',
+  },
   page: 1,
   totalSize: 0,
   sizePerPage: 10,
@@ -15,9 +18,9 @@ export default (state = INITIAL_STATE, action) => {
     case FETCH_USER.SUCCESS:
       return {
         ...state,
-        items: action.payload.data.items.data,
-        roles: action.payload.data.roles,
-        filters: action.payload.data.filters,
+        items: action.payload.data.data.items,
+        roles: action.payload.data.data.roles,
+        filters: action.payload.filters,
       }
     case EDIT_USER.SUCCESS:
       return {
@@ -44,9 +47,14 @@ export const getUserListData = state => {
   return {
     items: state.user.items,
     roles: state.user.roles,
+    filters: state.user.filters,
   }
 }
 
 export const getEditingUser = state => {
-  return state.user.editingUser
+  return {
+    user: state.user.editingUser,
+    roles: state.user.roles,
+    filters: state.user.filters,
+  }
 }

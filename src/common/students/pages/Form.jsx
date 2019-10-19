@@ -11,7 +11,6 @@ import BackIcon from '@material-ui/icons/ArrowBack'
 
 // External
 import React from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 // Internal
@@ -128,8 +127,4 @@ StudentForm.propTypes = {
   roles: PropTypes.array.isRequired,
 }
 
-const mapStateToProps = state => ({
-  student: state.student.editingStudent || [],
-})
-
-export default connect(mapStateToProps)(withStyles(styles)(StudentForm))
+export default withStyles(styles)(StudentForm)

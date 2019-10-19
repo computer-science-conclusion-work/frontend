@@ -21,6 +21,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import OpenIcon from '@material-ui/icons/OpenInNew'
 import SchoolIcon from '@material-ui/icons/School'
 import PersonIcon from '@material-ui/icons/Person'
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
 
 // External
 import classNames from 'classnames'
@@ -173,6 +174,11 @@ class Menu extends Component {
                   handle={this.props.handleDrawerClose}
                   icon={<SchoolIcon />}
                   title="Estudantes" />
+                <MenuButton
+                  route="/disciplines"
+                  handle={this.props.handleDrawerClose}
+                  icon={<LibraryBooksIcon />}
+                  title="Disciplinas" />
               </List>
             </Collapse>
           </List>
