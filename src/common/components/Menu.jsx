@@ -22,6 +22,7 @@ import OpenIcon from '@material-ui/icons/OpenInNew'
 import SchoolIcon from '@material-ui/icons/School'
 import PersonIcon from '@material-ui/icons/Person'
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
+import TimelineIcon from '@material-ui/icons/Timeline'
 
 // External
 import classNames from 'classnames'
@@ -181,6 +182,11 @@ class Menu extends Component {
                   title="Disciplinas" />
               </List>
             </Collapse>
+            <MenuButton
+              route="/students_median"
+              handle={this.props.handleDrawerClose}
+              icon={<TimelineIcon />}
+              title="Média dos Estudantes" />
           </List>
         </Drawer>
       </div>

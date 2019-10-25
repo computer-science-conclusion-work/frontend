@@ -8,6 +8,7 @@ import main from './MainReducer'
 import user from '../users/UserReducer'
 import student from '../students/StudentsReducer'
 import discipline from '../disciplines/DisciplinesReducer'
+import student_median from '../students_median/StudentsMedianReducer'
 
 const rootReducer = combineReducers({
   main,
@@ -15,6 +16,8 @@ const rootReducer = combineReducers({
   user,
   student,
   discipline,
+
+  student_median,
 })
 
 export default rootReducer

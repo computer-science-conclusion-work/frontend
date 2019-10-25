@@ -13,6 +13,8 @@ import Students from '../students/pages/index'
 import Disciplines from '../disciplines/pages/index'
 import EditUser from '../users/pages/Edit'
 
+import StudentMedian from '../students_median/pages/index'
+
 /* Rotas Privadas */
 const PrivateRouteWrapper = props => {
   const { user, role, ...routeProps } = props
@@ -54,6 +56,8 @@ const Routes = () => {
       <PrivateRoute role={[consts.ROLE_ADMIN]} path="/users" component={Users} />
       <PrivateRoute role={[consts.ROLE_ADMIN]} path="/students" component={Students} />
       <PrivateRoute role={[consts.ROLE_ADMIN]} path="/disciplines" component={Disciplines} />
+
+      <PrivateRoute role={[consts.ROLE_ADMIN]} path="/students_median" component={StudentMedian} />
 
       {/* Rotas Privadas para Professor */}
 
