@@ -23,7 +23,7 @@ class StudentMedian extends Component {
   }
 
   render() {
-    const { classes, items } = this.props
+    const { classes, items, students } = this.props
 
     return (
       <Index
@@ -31,7 +31,7 @@ class StudentMedian extends Component {
         title="Média dos Estudantes" >
         <Filter />
 
-        <Graph classes={classes} items={items} />
+        <Graph classes={classes} items={items} students={students} />
       </Index>
     )
   }
@@ -41,6 +41,7 @@ StudentMedian.propTypes = {
   classes: PropTypes.object.isRequired,
   fetchStudentsMedian: PropTypes.func.isRequired,
   items: PropTypes.array.isRequired,
+  students: PropTypes.array.isRequired,
 }
 
 const mapStateToProps = state => ({

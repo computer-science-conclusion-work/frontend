@@ -26,4 +26,7 @@ export default theme => ({
     tableCell: {
       backgroundColor: '#FFFFCC',
     },
+    container: {
+      height: 'calc(100vh - 250px)',
+    }
   })
