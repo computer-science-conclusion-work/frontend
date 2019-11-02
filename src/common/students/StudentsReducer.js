@@ -1,4 +1,9 @@
-import { EDIT_STUDENT, FETCH_STUDENT } from './StudentsActions'
+import {
+  EDIT_STUDENT,
+  FETCH_STUDENT,
+  FETCH_STUDENT_DISCIPLINE,
+  SAVE_STUDENT_DISCIPLINE
+} from './StudentsActions'
 
 const INITIAL_STATE = {
   items: [],
@@ -8,6 +13,7 @@ const INITIAL_STATE = {
     registration: '',
     name: '',
   },
+  student_discipline: null,
   page: 1,
   totalSize: 0,
   sizePerPage: 10,
@@ -25,6 +31,16 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         editingStudent: action.payload.items,
+      }
+    case FETCH_STUDENT_DISCIPLINE.SUCCESS:
+      return {
+        ...state,
+        student_discipline: action.payload.items,
+      }
+    case SAVE_STUDENT_DISCIPLINE.SUCCESS:
+      return {
+        ...state,
+        student_discipline: action.payload.items,
       }
     case 'STUDENT_INITIALIZE':
       return {

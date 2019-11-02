@@ -9,6 +9,13 @@ import TableRow from '@material-ui/core/TableRow'
 import DeleteIcon from '@material-ui/icons/Delete'
 import PencilIcon from '@material-ui/icons/Edit'
 
+import CurriculumIcon from '@material-ui/icons/LibraryBooks'
+import EquivalentsIcon from '@material-ui/icons/ImportContacts'
+import ExtraCurriculumIcon from '@material-ui/icons/LibraryAdd'
+import OngoingIcon from '@material-ui/icons/Schedule'
+import ToAttendIcon from '@material-ui/icons/RecordVoiceOver'
+import CurriculumEquivalentsIcon from '@material-ui/icons/ImportContactsTwoTone'
+
 // Externals imports (Dependencies)
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
@@ -54,8 +61,9 @@ class List extends Component {
           <TableHead>
             <TableRow>
               <TableCell style={{ width: '20%' }} align="center">Matrícula</TableCell>
-              <TableCell style={{ width: '40%' }}>Nome</TableCell>
+              <TableCell style={{ width: '20%' }}>Nome</TableCell>
               <TableCell style={{ width: '20%' }} align="center">Data de Egresso</TableCell>
+              <TableCell style={{ width: '20%' }} align="center">Disciplinas</TableCell>
               <TableCell style={{ width: '20%' }} align="center">Ações</TableCell>
             </TableRow>
           </TableHead>
@@ -66,6 +74,32 @@ class List extends Component {
                   <TableCell align="center">{item.registration}</TableCell>
                   <TableCell>{item.name}</TableCell>
                   <TableCell align="center">{item.egress_date || 'não informado'}</TableCell>
+                  <TableCell align="center">
+                    <ActionButton
+                      title="Currículo"
+                      route={`/students/${item.id}/curriculum`}
+                      icon={<CurriculumIcon />}/>
+                    <ActionButton
+                      title="Equivalentes"
+                      route={`/students/${item.id}/equivalents`}
+                      icon={<EquivalentsIcon />}/>
+                    <ActionButton
+                      title="Extra Currículo"
+                      route={`/students/${item.id}/extra_curriculum`}
+                      icon={<ExtraCurriculumIcon />}/>
+                    <ActionButton
+                      title="Em Curso"
+                      route={`/students/${item.id}/ongoing`}
+                      icon={<OngoingIcon />}/>
+                    <ActionButton
+                      title="A Cursar"
+                      route={`/students/${item.id}/to_attend`}
+                      icon={<ToAttendIcon />}/>
+                    <ActionButton
+                      title="Currículo Equivalentes"
+                      route={`/students/${item.id}/curriculum_equivalents`}
+                      icon={<CurriculumEquivalentsIcon />}/>
+                  </TableCell>
                   <TableCell align="center">
                     <ActionButton
                       title="Editar"

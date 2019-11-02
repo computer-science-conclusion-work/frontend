@@ -14,11 +14,20 @@ import { bindActionCreators } from 'redux'
 import styles from '../../../resources/theme/students'
 import Index from '../../templates/index'
 import MyButton from '../../components/MyButton'
+
 import NewStudent from './New'
 import EditStudent from './Edit'
 import DeleteStudent from './Delete'
 import List from './List'
 import Filter from './Filter'
+
+import Curriculum from './curriculum/index'
+import CurriculumEquivalents from './curriculum_equivalents/index'
+import Equivalents from './equivalents/index'
+import ExtraCurriculum from './extra_curriculum/index'
+import Ongoing from './ongoing/index'
+import ToAttend from './to_attend/index'
+
 import { fetchStudents } from '../StudentsActions'
 import { getStudentListData } from '../StudentsReducer'
 
@@ -47,6 +56,13 @@ class Student extends Component {
         <Route path="/students/new" component={NewStudent} />
         <Route path="/students/:id/edit" component={EditStudent} />
         <Route path="/students/:id/delete" component={DeleteStudent} />
+
+        <Route path="/students/:id/curriculum" component={Curriculum} />
+        <Route path="/students/:id/curriculum_equivalents" component={CurriculumEquivalents} />
+        <Route path="/students/:id/equivalents" component={Equivalents} />
+        <Route path="/students/:id/extra_curriculum" component={ExtraCurriculum} />
+        <Route path="/students/:id/ongoing" component={Ongoing} />
+        <Route path="/students/:id/to_attend" component={ToAttend} />
 
         <List classes={classes} items={items} />
       </Index>
