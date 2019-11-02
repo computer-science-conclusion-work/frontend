@@ -21,8 +21,8 @@ class Home extends Component {
         <Typography variant="h3">Home</Typography>
         <Divider className={classes.divider} />
         <Typography>
-          Este conteúdo está em{' '}
-          <span className={classes.span}>src/common/main/Home.js</span>
+          TODO:{' '}
+          <span className={classes.span}>Dashboard com as principais informações dos estudantes</span>
         </Typography>
       </Paper>
     )

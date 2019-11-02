@@ -18,6 +18,6 @@ export default theme => ({
     padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(3)}px`,
   },
   submit: {
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(1),
   },
 })
