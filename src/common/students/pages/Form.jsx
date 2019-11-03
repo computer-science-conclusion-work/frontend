@@ -5,7 +5,6 @@ import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator'
 import Button from '@material-ui/core/Button'
 import DialogContent from '@material-ui/core/DialogContent'
 import withStyles from '@material-ui/core/styles/withStyles'
-import { DatePicker } from '@material-ui/pickers'
 import SaveIcon from '@material-ui/icons/Save'
 import BackIcon from '@material-ui/icons/ArrowBack'
 
@@ -23,7 +22,7 @@ class StudentForm extends EnhancedComponent {
     fields: {
       registration: '',
       name: '',
-      egress_date: new Date(), 
+      egress_date: '', 
     },
   }
 
@@ -35,7 +34,7 @@ class StudentForm extends EnhancedComponent {
         ...nextProps,
         fields: {
           ...nextProps.data,
-          egress_date: new Date(),
+          egress_date: '',
         }
       })
     }
@@ -76,15 +75,16 @@ class StudentForm extends EnhancedComponent {
                 />
             </Grid>
             <Grid item xs>
-              <DatePicker
+              <TextValidator
+                onChange={this.onChange('egress_date')}
                 label="Data de Egresso"
-                fullWidth
-                format="dd/MM/yyyy"
-                disableFuture
-                inputVariant="outlined"
                 margin="dense"
-                onChange={this.onChangeValue('egress_date')}
-                value={this.state.fields.egress_date} />
+                variant="outlined"
+                fullWidth
+                value={this.state.fields.egress_date}
+                validators={['required']}
+                errorMessages={['Campo Obrigatório']}
+              />
             </Grid>
           </Grid>
           <Grid container spacing={2}>
