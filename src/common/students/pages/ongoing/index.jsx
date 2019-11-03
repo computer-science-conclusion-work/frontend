@@ -17,10 +17,7 @@ import { bindActionCreators } from 'redux'
 
 import styles from '../../../../resources/theme/students'
 import EnhancedComponent from '../../../components/EnhancedComponent'
-import {
-  fetchOngoing,
-  saveOngoing,
-} from '../../StudentsActions'
+import { fetchOngoing } from '../../StudentsActions'
 
 // Internal imports
 import List from './List'
@@ -37,16 +34,6 @@ class Ongoing extends EnhancedComponent {
 
   componentDidMount() {
     this.props.fetchOngoing(this.props.match.params.id)
-  }
-
-  onSubmit = values => {
-    this.props
-      .saveOngoing(this.props.match.params.id, values)
-      .then(data => {
-        if (data && data.code === 200) {
-          this.props.history.push('/students')
-        }
-      })
   }
 
   onClose = () => {
@@ -80,8 +67,7 @@ class Ongoing extends EnhancedComponent {
         <List
             data={items}
             classes={classes}
-            onClose={this.onClose}
-            onSubmit={this.onSubmit} />
+            onClose={this.onClose} />
 
         </Dialog>
     )
@@ -101,7 +87,6 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       fetchOngoing,
-      saveOngoing,
     },
     dispatch
   )

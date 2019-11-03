@@ -14,7 +14,6 @@ export const FETCH_STUDENT = createAsyncConst('FETCH_STUDENT')
 export const EDIT_STUDENT = createAsyncConst('EDIT_STUDENT')
 
 export const FETCH_STUDENT_DISCIPLINE = createAsyncConst('FETCH_STUDENT_DISCIPLINE')
-export const SAVE_STUDENT_DISCIPLINE = createAsyncConst('SAVE_STUDENT_DISCIPLINE')
 
 export function fetchStudents(page, filters = [], rows) {
   return dispatch => {
@@ -92,25 +91,10 @@ function fetchStudentDisciplne(id, stage_id) {
         `${config.API_URL}/students/${id}/stage/${stage_id}`
       )
       .then(resp => {
-        dispatch(action(FETCH_STUDENT_DISCIPLINE.SUCCESS, resp.data))
-        return resp
+        dispatch(action(FETCH_STUDENT_DISCIPLINE.SUCCESS, resp.data.data))
+        return resp.data
       })
       .catch(e => dispatch(actionFailed(FETCH_STUDENT_DISCIPLINE, e)))
-  }
-}
-
-function saveStudentDisciplne(id, stage_id, values) {
-  return dispatch => {
-    dispatch(action(SAVE_STUDENT_DISCIPLINE.ACTION))
-    return axios
-      .post(
-        `${config.API_URL}/students/${id}/stage/${stage_id}`, values
-      )
-      .then(resp => {
-        dispatch(action(SAVE_STUDENT_DISCIPLINE.SUCCESS, resp.data))
-        return resp
-      })
-      .catch(e => dispatch(actionFailed(SAVE_STUDENT_DISCIPLINE, e)))
   }
 }
 
@@ -119,17 +103,9 @@ export function fetchCurriculum(id) {
   return fetchStudentDisciplne(id, consts.STAGE_CURRICULUM)
 }
 
-export function saveCurriculum(id, values) {
-  return saveStudentDisciplne(id, consts.STAGE_CURRICULUM, values)
-}
-
 // EQUIVALENTS
 export function fetchEquivalents(id) {
   return fetchStudentDisciplne(id, consts.STAGE_EQUIVALENT)
-}
-
-export function saveEquivalents(id, values) {
-  return saveStudentDisciplne(id, consts.STAGE_EQUIVALENT, values)
 }
 
 // EXTRA-CURRICULUM
@@ -137,17 +113,9 @@ export function fetchExtraCurriculum(id) {
   return fetchStudentDisciplne(id, consts.STAGE_EXTRA_CURRICULUM)
 }
 
-export function saveExtraCurriculum(id, values) {
-  return saveStudentDisciplne(id, consts.STAGE_EXTRA_CURRICULUM, values)
-}
-
 // ONGOING
 export function fetchOngoing(id) {
   return fetchStudentDisciplne(id, consts.STAGE_ONGOING)
-}
-
-export function saveOngoing(id, values) {
-  return saveStudentDisciplne(id, consts.STAGE_ONGOING, values)
 }
 
 // TO_ATTEND
@@ -155,15 +123,7 @@ export function fetchToAttend(id) {
   return fetchStudentDisciplne(id, consts.STAGE_TO_ATTEND)
 }
 
-export function saveToAttend(id, values) {
-  return saveStudentDisciplne(id, consts.STAGE_TO_ATTEND, values)
-}
-
 // CURRICULUM
 export function fetchCurriculumEquivalents(id) {
   return fetchStudentDisciplne(id, consts.STAGE_CURRICULUM_EQUIVALENTS)
-}
-
-export function saveCurriculumEquivalents(id, values) {
-  return saveStudentDisciplne(id, consts.STAGE_CURRICULUM_EQUIVALENTS, values)
 }

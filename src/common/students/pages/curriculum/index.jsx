@@ -17,10 +17,7 @@ import { bindActionCreators } from 'redux'
 
 import styles from '../../../../resources/theme/students'
 import EnhancedComponent from '../../../components/EnhancedComponent'
-import {
-  fetchCurriculum,
-  saveCurriculum,
-} from '../../StudentsActions'
+import { fetchCurriculum } from '../../StudentsActions'
 
 // Internal imports
 import List from './List'
@@ -37,16 +34,6 @@ class Curriculum extends EnhancedComponent {
 
   componentDidMount() {
     this.props.fetchCurriculum(this.props.match.params.id)
-  }
-
-  onSubmit = values => {
-    this.props
-      .saveCurriculum(this.props.match.params.id, values)
-      .then(data => {
-        if (data && data.code === 200) {
-          this.props.history.push('/students')
-        }
-      })
   }
 
   onClose = () => {
@@ -80,8 +67,7 @@ class Curriculum extends EnhancedComponent {
         <List
             data={items}
             classes={classes}
-            onClose={this.onClose}
-            onSubmit={this.onSubmit} />
+            onClose={this.onClose} />
 
         </Dialog>
     )
@@ -101,7 +87,6 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
         fetchCurriculum,
-        saveCurriculum,
     },
     dispatch
   )

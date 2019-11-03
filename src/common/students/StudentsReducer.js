@@ -1,8 +1,7 @@
 import {
   EDIT_STUDENT,
   FETCH_STUDENT,
-  FETCH_STUDENT_DISCIPLINE,
-  SAVE_STUDENT_DISCIPLINE
+  FETCH_STUDENT_DISCIPLINE
 } from './StudentsActions'
 
 const INITIAL_STATE = {
@@ -33,11 +32,6 @@ export default (state = INITIAL_STATE, action) => {
         editingStudent: action.payload.items,
       }
     case FETCH_STUDENT_DISCIPLINE.SUCCESS:
-      return {
-        ...state,
-        student_discipline: action.payload.items,
-      }
-    case SAVE_STUDENT_DISCIPLINE.SUCCESS:
       return {
         ...state,
         student_discipline: action.payload.items,

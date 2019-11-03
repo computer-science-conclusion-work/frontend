@@ -1,6 +1,5 @@
 // IMPORTS
 // Material UI
-import Button from '@material-ui/core/Button'
 import Slide from '@material-ui/core/Slide'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -14,9 +13,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 // Internal imports
+import EmptyList from '../../../components/EmptyList'
 import styles from '../../../../resources/theme/students'
 import EnhancedComponent from '../../../components/EnhancedComponent'
-import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
 
 function Transition(props) {
   return <Slide direction="down" {...props} />
@@ -53,11 +52,6 @@ class List extends EnhancedComponent {
     })
   }
 
-  onSubmit = e => {
-    e.preventDefault()
-    this.props.onSubmit && this.props.onSubmit(this.state.fields.curriculum_equivalents)
-  }
-
   onClose = () => {
     this.props.onClose && this.props.onClose()
   }
@@ -66,51 +60,50 @@ class List extends EnhancedComponent {
     const { classes } = this.props
     const { curriculum_equivalents } = this.state.fields
     return (
-        <ValidatorForm
-            ref="form"
-            onSubmit={this.onSubmit}
-            onError={errors => console.log(errors)}
-            className={classes.main}
-        >
-            <Table>
-                <TableHead>
-                <TableRow>
-                    <TableCell>Disciplina</TableCell>
-                    <TableCell>Ano/Semestre</TableCell>
-                    <TableCell>Carga de Trabalho</TableCell>
-                    <TableCell>Créditos</TableCell>
-                    <TableCell>Nota</TableCell>
+        <Table>
+            <TableHead>
+            <TableRow>
+              <TableCell>Código</TableCell>
+              <TableCell>Disciplina</TableCell>
+              <TableCell>Pseudônimo</TableCell>
+              <TableCell>Período</TableCell>
+              <TableCell>Ano/Semestre</TableCell>
+              <TableCell>Carga de Trabalho</TableCell>
+              <TableCell>Créditos</TableCell>
+              <TableCell>Nota</TableCell>
+            </TableRow>
+            </TableHead>
+            <TableBody>
+            {curriculum_equivalents.length ? curriculum_equivalents.map((item, index) => (
+                <TableRow key={item.id}>
+                    <TableCell>{item.code}</TableCell>
+                    <TableCell>{item.name}</TableCell>
+                    <TableCell>{item.alias}</TableCell>
+                    <TableCell>{`${item.period}°`}</TableCell>
+                    <TableCell>
+                      {item.pivot && item.pivot.year_semester ?
+                      item.pivot.year_semester : '-'}
+                    </TableCell>
+                    <TableCell>
+                      {item.pivot && item.pivot.workload ?
+                      item.pivot.workload : '-'}
+                    </TableCell>
+                    <TableCell>
+                      {item.pivot && item.pivot.credits ?
+                      item.pivot.credits : '-'}
+                    </TableCell>
+                    <TableCell>
+                      {item.pivot && item.pivot.note ?
+                        item.pivot.note : '-'}
+                    </TableCell>
                 </TableRow>
-                </TableHead>
-                <TableBody>
-                {curriculum_equivalents.map((item, index) => (
-                    <TableRow key={item.id}>
-                        <TableCell>{item.discipline_name}</TableCell>
-                        <TableCell>{item.year_semester}</TableCell>
-                        <TableCell>{item.workload}</TableCell>
-                        <TableCell>{item.credits}</TableCell>
-                        <TableCell>
-                            <TextValidator
-                                onChange={this.handleNote(index)}
-                                margin="dense"
-                                variant="outlined"
-                                fullWidth
-                                value={item.note}
-                            />
-                        </TableCell>
-                    </TableRow>
-                ))}
-                </TableBody>
-            </Table>
-            <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-            >
-            Salvar
-            </Button>
-        </ValidatorForm>
+            )):
+              <EmptyList tableCell={classes.tableCell}
+                colSpan={8}
+                gridContainer={classes.gridContainer}
+                message={'Lista Vazia'} /> }
+            </TableBody>
+        </Table>
     )
   }
 }
