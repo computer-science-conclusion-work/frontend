@@ -13,6 +13,9 @@ export const SUBMIT_DISCIPLINE = createAsyncConst('SUBMIT_DISCIPLINE')
 export const FETCH_DISCIPLINE = createAsyncConst('FETCH_DISCIPLINE')
 export const EDIT_DISCIPLINE = createAsyncConst('EDIT_DISCIPLINE')
 
+export const FETCH_PREREQUISITES = createAsyncConst('FETCH_PREREQUISITES')
+export const FETCH_COREQUISITES = createAsyncConst('FETCH_COREQUISITES')
+
 export function fetchDisciplines(page, filters = [], rows) {
   return dispatch => {
     dispatch(action(FETCH_DISCIPLINE.ACTION))
@@ -78,5 +81,35 @@ export function destroy(id, filters = []) {
         return resp.data
       })
       .catch(e => actionFailed(REMOVE_DISCIPLINE.FAILURE, e))
+  }
+}
+
+export function fetchPrerequisites(id) {
+  return dispatch => {
+    dispatch(action(FETCH_PREREQUISITES.ACTION))
+    return axios
+      .get(
+        `${config.API_URL}/disciplines/${id}/prerequisites`
+      )
+      .then(resp => {
+        dispatch(action(FETCH_PREREQUISITES.SUCCESS, resp.data.data))
+        return resp.data
+      })
+      .catch(e => dispatch(actionFailed(FETCH_PREREQUISITES, e)))
+  }
+}
+
+export function fetchCorequisites(id) {
+  return dispatch => {
+    dispatch(action(FETCH_COREQUISITES.ACTION))
+    return axios
+      .get(
+        `${config.API_URL}/disciplines/${id}/corequisites`
+      )
+      .then(resp => {
+        dispatch(action(FETCH_COREQUISITES.SUCCESS, resp.data.data))
+        return resp.data
+      })
+      .catch(e => dispatch(actionFailed(FETCH_COREQUISITES, e)))
   }
 }

@@ -14,7 +14,7 @@ import PropTypes from 'prop-types'
 
 // Internal imports
 import EmptyList from '../../../components/EmptyList'
-import styles from '../../../../resources/theme/students'
+import styles from '../../../../resources/theme/disciplines'
 import EnhancedComponent from '../../../components/EnhancedComponent'
 
 function Transition(props) {
@@ -25,7 +25,7 @@ class List extends EnhancedComponent {
   state = {
     dirty: false,
     fields: {
-      equivalents: [],
+      prerequisites: [],
     },
   }
 
@@ -34,7 +34,7 @@ class List extends EnhancedComponent {
       return ({
         ...nextProps,
         fields: {
-          equivalents: nextProps.data,
+            prerequisites: nextProps.data,
         }
       })
     }
@@ -46,7 +46,7 @@ class List extends EnhancedComponent {
 
   render() {
     const { classes } = this.props
-    const { equivalents } = this.state.fields
+    const { prerequisites } = this.state.fields
     return (
         <Table>
             <TableHead>
@@ -55,41 +55,21 @@ class List extends EnhancedComponent {
               <TableCell>Disciplina</TableCell>
               <TableCell>Pseudônimo</TableCell>
               <TableCell>Período</TableCell>
-              <TableCell>Ano/Semestre</TableCell>
-              <TableCell>Carga de Trabalho</TableCell>
-              <TableCell>Créditos</TableCell>
-              <TableCell>Nota</TableCell>
             </TableRow>
             </TableHead>
             <TableBody>
-            {equivalents.length ? equivalents.map((item, index) => (
+            {prerequisites.length ? prerequisites.map((item, index) => (
                 <TableRow key={item.id}>
                     <TableCell>{item.code}</TableCell>
                     <TableCell>{item.name}</TableCell>
                     <TableCell>{item.alias}</TableCell>
                     <TableCell>{`${item.period}°`}</TableCell>
-                    <TableCell>
-                      {item.pivot && item.pivot.year_semester ?
-                      item.pivot.year_semester : '-'}
-                    </TableCell>
-                    <TableCell>
-                      {item.pivot && item.pivot.workload ?
-                      item.pivot.workload : '-'}
-                    </TableCell>
-                    <TableCell>
-                      {item.pivot && item.pivot.credits ?
-                      item.pivot.credits : '-'}
-                    </TableCell>
-                    <TableCell>
-                      {item.pivot && item.pivot.note ?
-                        item.pivot.note : '-'}
-                    </TableCell>
                 </TableRow>
             )):
-              <EmptyList tableCell={classes.tableCell}
-                colSpan={8}
-                gridContainer={classes.gridContainer}
-                message={'Lista Vazia'} /> }
+            <EmptyList tableCell={classes.tableCell}
+              colSpan={4}
+              gridContainer={classes.gridContainer}
+              message={'Lista Vazia'} /> }
             </TableBody>
         </Table>
     )

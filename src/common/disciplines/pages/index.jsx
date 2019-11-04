@@ -12,13 +12,18 @@ import { bindActionCreators } from 'redux'
 
 // Internal
 import styles from '../../../resources/theme/disciplines'
-import Index from '../../templates/index'
 import MyButton from '../../components/MyButton'
+
+import Index from '../../templates/index'
 import NewDiscipline from './New'
 import EditDiscipline from './Edit'
 import DeleteDiscipline from './Delete'
 import List from './List'
 import Filter from './Filter'
+
+import Corequisites from './corequisites/index'
+import Prerequisites from './prerequisites/index'
+
 import { fetchDisciplines } from '../DisciplinesActions'
 import { getDisciplineListData } from '../DisciplinesReducer'
 
@@ -47,6 +52,9 @@ class Discipline extends Component {
         <Route path="/disciplines/new" component={NewDiscipline} />
         <Route path="/disciplines/:id/edit" component={EditDiscipline} />
         <Route path="/disciplines/:id/delete" component={DeleteDiscipline} />
+
+        <Route path="/disciplines/:id/corequisites" component={Corequisites} />
+        <Route path="/disciplines/:id/prerequisites" component={Prerequisites} />
 
         <List classes={classes} items={items} />
       </Index>

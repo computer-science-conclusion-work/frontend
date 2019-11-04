@@ -1,9 +1,16 @@
-import { EDIT_DISCIPLINE, FETCH_DISCIPLINE } from './DisciplinesActions'
+import {
+  EDIT_DISCIPLINE,
+  FETCH_DISCIPLINE,
+  FETCH_PREREQUISITES,
+  FETCH_COREQUISITES
+} from './DisciplinesActions'
 
 const INITIAL_STATE = {
   items: [],
   roles: [],
   editingDiscipline: null,
+  prerequisites: [],
+  corequisites: [],
   filters: {
     code: '',
     name: '',
@@ -26,6 +33,16 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         editingDiscipline: action.payload.items,
+      }
+    case FETCH_PREREQUISITES.SUCCESS:
+      return {
+        ...state,
+        prerequisites: action.payload.items,
+      }
+    case FETCH_COREQUISITES.SUCCESS:
+      return {
+        ...state,
+        corequisites: action.payload.items,
       }
     case 'DISCIPLINE_INITIALIZE':
       return {

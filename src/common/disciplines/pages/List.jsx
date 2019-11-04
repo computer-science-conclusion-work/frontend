@@ -8,6 +8,8 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import DeleteIcon from '@material-ui/icons/Delete'
 import PencilIcon from '@material-ui/icons/Edit'
+import CorequisiteIcon from '@material-ui/icons/Shuffle'
+import PrerequisiteIcon from '@material-ui/icons/Repeat'
 
 // Externals imports (Dependencies)
 import React, { Component } from 'react'
@@ -55,8 +57,9 @@ class List extends Component {
             <TableRow>
               <TableCell style={{ width: '20%' }}>Código</TableCell>
               <TableCell style={{ width: '20%' }}>Nome</TableCell>
-              <TableCell style={{ width: '20%' }} align="center">Pseudônimo</TableCell>
-              <TableCell style={{ width: '20%' }} align="center">Período</TableCell>
+              <TableCell style={{ width: '10%' }} align="center">Pseudônimo</TableCell>
+              <TableCell style={{ width: '10%' }} align="center">Período</TableCell>
+              <TableCell style={{ width: '20%' }} align="center">Requisitos</TableCell>
               <TableCell style={{ width: '20%' }} align="center">Ações</TableCell>
             </TableRow>
           </TableHead>
@@ -68,6 +71,16 @@ class List extends Component {
                   <TableCell>{item.name}</TableCell>
                   <TableCell align="center">{item.alias}</TableCell>
                   <TableCell align="center">{`${item.period}°`}</TableCell>
+                  <TableCell align="center">
+                    <ActionButton
+                      title="Co-requisitos"
+                      route={`/disciplines/${item.id}/corequisites`}
+                      icon={<CorequisiteIcon />}/>
+                    <ActionButton
+                      title="Pré-requisitos"
+                      route={`/disciplines/${item.id}/prerequisites`}
+                      icon={<PrerequisiteIcon />}/>
+                  </TableCell>
                   <TableCell align="center">
                     <ActionButton
                       title="Editar"

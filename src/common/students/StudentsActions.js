@@ -83,7 +83,7 @@ export function destroy(id, filters = []) {
   }
 }
 
-function fetchStudentDisciplne(id, stage_id) {
+function fetchStudentDiscipline(id, stage_id) {
   return dispatch => {
     dispatch(action(FETCH_STUDENT_DISCIPLINE.ACTION))
     return axios
@@ -100,30 +100,30 @@ function fetchStudentDisciplne(id, stage_id) {
 
 // CURRICULUM
 export function fetchCurriculum(id) {
-  return fetchStudentDisciplne(id, consts.STAGE_CURRICULUM)
+  return fetchStudentDiscipline(id, consts.STAGE_CURRICULUM)
 }
 
 // EQUIVALENTS
 export function fetchEquivalents(id) {
-  return fetchStudentDisciplne(id, consts.STAGE_EQUIVALENT)
+  return fetchStudentDiscipline(id, consts.STAGE_EQUIVALENT)
 }
 
 // EXTRA-CURRICULUM
 export function fetchExtraCurriculum(id) {
-  return fetchStudentDisciplne(id, consts.STAGE_EXTRA_CURRICULUM)
+  return fetchStudentDiscipline(id, consts.STAGE_EXTRA_CURRICULUM)
 }
 
 // ONGOING
 export function fetchOngoing(id) {
-  return fetchStudentDisciplne(id, consts.STAGE_ONGOING)
+  return fetchStudentDiscipline(id, consts.STAGE_ONGOING)
 }
 
 // TO_ATTEND
 export function fetchToAttend(id) {
-  return fetchStudentDisciplne(id, consts.STAGE_TO_ATTEND)
+  return fetchStudentDiscipline(id, consts.STAGE_TO_ATTEND)
 }
 
 // CURRICULUM
 export function fetchCurriculumEquivalents(id) {
-  return fetchStudentDisciplne(id, consts.STAGE_CURRICULUM_EQUIVALENTS)
+  return fetchStudentDiscipline(id, consts.STAGE_CURRICULUM_EQUIVALENTS)
 }

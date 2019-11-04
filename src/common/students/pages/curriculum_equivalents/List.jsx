@@ -40,18 +40,6 @@ class List extends EnhancedComponent {
     }
   }
 
-  handleNote = index => event => {
-    let localState = this.state.fields.curriculum_equivalents
-    localState[index].note = event.target.value
-
-    this.setState({
-      fields: {
-        ...this.state.fields,
-        localState,
-      },
-    })
-  }
-
   onClose = () => {
     this.props.onClose && this.props.onClose()
   }

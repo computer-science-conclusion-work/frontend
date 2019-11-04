@@ -12,9 +12,9 @@ import { bindActionCreators } from 'redux'
 
 // Internal
 import styles from '../../../resources/theme/students'
-import Index from '../../templates/index'
 import MyButton from '../../components/MyButton'
 
+import Index from '../../templates/index'
 import NewStudent from './New'
 import EditStudent from './Edit'
 import DeleteStudent from './Delete'
