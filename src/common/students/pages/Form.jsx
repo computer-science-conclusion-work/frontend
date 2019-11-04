@@ -10,6 +10,7 @@ import BackIcon from '@material-ui/icons/ArrowBack'
 
 // External
 import React from 'react'
+import InputMask from 'react-input-mask'
 import PropTypes from 'prop-types'
 
 // Internal
@@ -34,7 +35,6 @@ class StudentForm extends EnhancedComponent {
         ...nextProps,
         fields: {
           ...nextProps.data,
-          egress_date: '',
         }
       })
     }
@@ -75,16 +75,23 @@ class StudentForm extends EnhancedComponent {
                 />
             </Grid>
             <Grid item xs>
-              <TextValidator
-                onChange={this.onChange('egress_date')}
-                label="Data de Egresso"
-                margin="dense"
-                variant="outlined"
-                fullWidth
+              <InputMask
+                mask="9999/9"
                 value={this.state.fields.egress_date}
-                validators={['required']}
-                errorMessages={['Campo Obrigatório']}
-              />
+                onChange={this.onChange('egress_date')}
+                maskChar={null}
+              >
+                {() => (
+                  <TextValidator
+                    label="Data de Egresso"
+                    margin="dense"
+                    variant="outlined"
+                    fullWidth
+                    validators={['required']}
+                    errorMessages={['Campo Obrigatório']}
+                  />
+                )}
+              </InputMask>
             </Grid>
           </Grid>
           <Grid container spacing={2}>
