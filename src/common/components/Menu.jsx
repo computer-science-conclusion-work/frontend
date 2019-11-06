@@ -23,6 +23,7 @@ import SchoolIcon from '@material-ui/icons/School'
 import PersonIcon from '@material-ui/icons/Person'
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
 import TimelineIcon from '@material-ui/icons/Timeline'
+import BubbleChartIcon from '@material-ui/icons/BubbleChart'
 
 // External
 import classNames from 'classnames'
@@ -187,6 +188,11 @@ class Menu extends Component {
               handle={this.props.handleDrawerClose}
               icon={<TimelineIcon />}
               title="Média dos Estudantes" />
+            <MenuButton
+              route="/students_walking"
+              handle={this.props.handleDrawerClose}
+              icon={<BubbleChartIcon />}
+              title="Caminhamento dos Estudantes" />
           </List>
         </Drawer>
       </div>

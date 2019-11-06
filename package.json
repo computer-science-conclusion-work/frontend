@@ -24,6 +24,7 @@
     "qs": "^6.4.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-graph-vis": "^1.0.5",
     "react-input-mask": "^2.0.4",
     "react-material-ui-form-validator": "^2.0.9",
     "react-redux": "^7.0.3",

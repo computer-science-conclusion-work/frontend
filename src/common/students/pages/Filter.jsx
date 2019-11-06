@@ -20,7 +20,7 @@ import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 
 // Internal
-import styles from '../../../resources/theme/default'
+import styles from '../../../resources/theme/students'
 import EnhancedComponent from '../../components/EnhancedComponent'
 import { fetchStudents } from '../StudentsActions'
 

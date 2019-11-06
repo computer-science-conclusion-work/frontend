@@ -1,10 +1,6 @@
 // IMPORTS
 // Material-ui
 import Paper from '@material-ui/core/Paper'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableRow from '@material-ui/core/TableRow'
-import TableCell from '@material-ui/core/TableCell'
 
 // Externals imports (Dependencies)
 import React, { Component } from 'react'

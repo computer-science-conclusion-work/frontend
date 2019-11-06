@@ -20,9 +20,9 @@ import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 
 // Internal
-import styles from '../../../resources/theme/students_median'
+import styles from '../../../resources/theme/students_walking'
 import EnhancedComponent from '../../components/EnhancedComponent'
-import { fetchStudentsMedian } from '../StudentsMedianActions'
+import { fetchStudentsWalking } from '../StudentsWalkingActions'
 
 class Filters extends EnhancedComponent {
   state = {
@@ -35,7 +35,7 @@ class Filters extends EnhancedComponent {
 
   onSubmit = e => {
     e.preventDefault()
-    this.props.fetchStudentsMedian(this.state.fields)
+    this.props.fetchStudentsWalking(this.state.fields)
   }
 
   render() {
@@ -100,7 +100,7 @@ Filters.PropTypes = {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      fetchStudentsMedian
+      fetchStudentsWalking
     },
     dispatch
   )

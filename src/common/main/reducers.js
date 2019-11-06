@@ -9,6 +9,7 @@ import user from '../users/UserReducer'
 import student from '../students/StudentsReducer'
 import discipline from '../disciplines/DisciplinesReducer'
 import student_median from '../students_median/StudentsMedianReducer'
+import student_walking from '../students_walking/StudentsWalkingReducer'
 
 const rootReducer = combineReducers({
   main,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   discipline,
 
   student_median,
+  student_walking,
 })
 
 export default rootReducer
