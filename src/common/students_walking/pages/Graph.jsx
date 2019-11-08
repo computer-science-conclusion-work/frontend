@@ -17,7 +17,9 @@ class List extends Component {
   }
 
   render() {
-    const { classes, items, students } = this.props
+    const { classes, items } = this.props
+
+    console.log(items)
 
     const graph = {
         nodes: [
@@ -139,6 +141,9 @@ class List extends Component {
         layout: {
             hierarchical: false
         },
+        nodes: {
+          color: "#B0E0E6"
+        },
         edges: {
             color: "#000000"
         },
@@ -147,10 +152,10 @@ class List extends Component {
      
     const events = {
         select: function(event) {
-            var { nodes, edges } = event
-            console.log(event)
-            console.log(nodes)
-            console.log(edges)
+          var { nodes, edges } = event
+          console.log(event)
+          console.log(nodes)
+          console.log(edges)
         }
     }
     

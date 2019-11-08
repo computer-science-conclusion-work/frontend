@@ -26,6 +26,12 @@ export default theme => ({
     tableCell: {
       backgroundColor: '#FFFFCC',
     },
+    background: {
+      paddingTop: theme.spacing(2),
+      paddingBottom: theme.spacing(2),
+      marginTop: theme.spacing(2),
+      backgroundColor: '#FFFFCC',
+    },
     container: {
       height: '100vh',
     }
